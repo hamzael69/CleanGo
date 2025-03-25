@@ -1,17 +1,134 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+		{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body class="bg-white">
+
+		<header class="fixed top-0 left-0 right-0 z-50 ">
+			<nav
+				class="px-6 py-4 flex justify-between items-center backdrop-blur-[4px] bg-white bg-opacity-5 lg:px-20">
+				{# Logo #}
+
+				<a href="{{ path('app_home') }}" data-turbo="false" class="flex items-center space-x-2">
+					<img class="w-[5%]" src="{{ asset('img/logohamza.webp') }}" alt="Logo CleanGo">
+					<h1 class="text-xl font-bold text-vertBase">CleanGo</h1>
+				</a>
+
+
+				{# Menu Desktop #}
+				<div class="hidden xl:flex items-center space-x-8">
+					<a href="{{ path('app_home') }}" data-turbo="false" class="text-vertBase font-semibold hover:text-white transition-all duration-300">Accueil</a>
+					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Services</a>
+					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Contact</a>
+					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Se connecter</a>
+				</div>
+
+				{# Bouton Menu Burger #}
+				<button id="menu-btn" class="block xl:hidden w-10 h-10 relative focus:outline-none z-[1000] cursor-pointer">
+					<span id="burger-top" class="absolute w-8 h-0.5 bg-vertBase/80 transform transition-all duration-500 -translate-x-1/2 left-1/2"></span>
+					<span id="burger-middle" class="absolute w-8 h-0.5 bg-vertBase/80 transform transition-all duration-500 -translate-x-1/2 left-1/2 top-1/2"></span>
+					<span id="burger-bottom" class="absolute w-8 h-0.5 bg-vertBase/80 transform transition-all duration-500 -translate-x-1/2 left-1/2"></span>
+				</button>
+
+				{# Menu Mobile #}
+				<div id="mobile-menu" class="fixed inset-0 min-h-screen w-full bg-white transform translate-x-full transition-transform duration-500 ease-in-out xl:hidden z-[999]">
+					<div class="flex flex-col h-full items-center justify-center pt-16">
+						<ul class="flex flex-col items-center space-y-8 w-full">
+							<li>
+								<a href="{{ path('app_home') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Accueil</a>
+							</li>
+							<li>
+								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Services</a>
+							</li>
+							<li>
+								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Contact</a>
+							</li>
+							<li>
+								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Se connecter</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</nav>
+
+
+		</header>
+
+
+		{% block body %}{% endblock %}
+
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+const burgerTop = document.getElementById("burger-top");
+const burgerMiddle = document.getElementById("burger-middle");
+const burgerBottom = document.getElementById("burger-bottom");
+const body = document.body;
+let isOpen = false;
+
+// Position initiale des barres du burger
+burgerTop.style.top = "30%";
+burgerMiddle.style.top = "50%";
+burgerBottom.style.top = "70%";
+
+menuBtn.addEventListener("click", function () {
+isOpen = ! isOpen;
+
+if (isOpen) { // Animation ouverture
+mobileMenu.style.transform = "translateX(0)";
+body.style.overflow = "hidden";
+
+// Animation du burger en X avec couleur différente
+burgerTop.style.top = "50%";
+burgerTop.style.transform = "translate(-50%, -50%) rotate(45deg)";
+burgerMiddle.style.opacity = "0";
+burgerBottom.style.top = "50%";
+burgerBottom.style.transform = "translate(-50%, -50%) rotate(-45deg)";
+
+// Optionnel : Changer la couleur des barres en croix
+burgerTop.style.backgroundColor = "#4CAF50";
+burgerBottom.style.backgroundColor = "#4CAF50";
+} else { // Animation fermeture
+mobileMenu.style.transform = "translateX(100%)";
+body.style.overflow = "auto";
+
+// Retour à la position burger avec couleur initiale
+burgerTop.style.top = "30%";
+burgerTop.style.transform = "translate(-50%, 0) rotate(0)";
+burgerMiddle.style.opacity = "1";
+burgerBottom.style.top = "70%";
+burgerBottom.style.transform = "translate(-50%, 0) rotate(0)";
+
+// Retour à la couleur initiale
+burgerTop.style.backgroundColor = "#1F2937";
+burgerMiddle.style.backgroundColor = "#1F2937";
+burgerBottom.style.backgroundColor = "#1F2937";
+
+// Redirection vers l'accueil si le menu est fermé
+window.location.href = "{{ path('app_home') }}";
+}
+});
+});
+		</script>
+
+	</body>
 </html>

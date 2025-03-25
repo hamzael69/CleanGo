@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+
+{% block body %}
+	{# Hero Banner #}
+	<div class="relative min-h-screen w-full bg-hero bg-cover bg-center bg-no-repeat">
+		<div
+			class="absolute inset-0 bg-black/50 flex items-center justify-center">
+			{# Overlay sombre #}
+			<div class="container mx-auto flex flex-col items-center justify-center text-white px-4">
+				<span class="text-3xl md:text-6xl font-bold text-center mb-4 text-yellow-500">Un ménage impéccable
+					<br><span class="text-white">en quelques clics</span>
+				</span>
+				<p class="text-base md:text-2xl text-center mb-8">Réservez un service de nettoyage professionnel à domicile en<br class="hidden lg:block">quelques minutes. Des experts qualifiés, des résultats garantis.</p>
+				<div class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+					<a href="#" class="bg-vertBase hover:bg-vertBase/80 text-white px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
+						Reservez maintenant
+					</a>
+
+					<a href="#" class="bg-teal-200 hover:bg-vertBase/80 text-vertBase px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
+						Nos services
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
