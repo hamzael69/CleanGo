@@ -6,7 +6,7 @@
 
 {% block body %}
 	{# Hero Banner #}
-	<div class="relative min-h-screen w-full bg-hero bg-cover bg-center bg-no-repeat">
+	<section class="relative min-h-screen w-full bg-hero bg-cover bg-center bg-no-repeat">
 		<div
 			class="absolute inset-0 bg-black/50 flex items-center justify-center">
 			{# Overlay sombre #}
@@ -27,5 +27,40 @@
 
 			</div>
 		</div>
-	</div>
+	</section>
+
+
+	<section class="py-12 px-6 text-center">
+        <h2 class="text-2xl font-semibold">Un service de qualité</h2>
+        <p class="text-gray-600 mt-2">Un service fiable, pour un intérieur impeccable en toute sérénité.</p>
+
+        <div class="mt-8 flex flex-col items-center md:flex-row md:justify-center md:space-x-6 space-y-6 md:space-y-0">
+            <!-- Réservation facile -->
+            <div class="bg-white p-6 shadow-md rounded-lg w-full max-w-sm text-center">
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('img/calendrier.png') }}" alt="Calendrier" />
+                </div>
+                <h3 class="font-semibold text-lg">Réservation facile</h3>
+                <p class="text-gray-600 mt-2">Réservez en ligne en quelques minutes pour le jour qui vous convient.</p>
+            </div>
+
+            <!-- Service ponctuel -->
+            <div class="bg-white p-6 shadow-md rounded-lg w-full max-w-sm text-center">
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('img/horloge.png') }}" alt="Horloge" />
+                </div>
+                <h3 class="font-semibold text-lg">Service ponctuel</h3>
+                <p class="text-gray-600 mt-2">Nos professionnels arrivent à l’heure convenue, respectant votre emploi du temps.</p>
+            </div>
+
+            <!-- Qualité garantie -->
+            <div class="bg-white p-6 shadow-md rounded-lg w-full max-w-sm text-center">
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('img/verifier.png') }}" alt="Qualité garantie" />
+                </div>
+                <h3 class="font-semibold text-lg">Qualité garantie</h3>
+                <p class="text-gray-600 mt-2">Satisfaction garantie ou nous revenons gratuitement pour corriger.</p>
+            </div>
+        </div>
+    </section>
 {% endblock %}
