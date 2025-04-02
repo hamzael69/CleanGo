@@ -16,11 +16,11 @@
 				</span>
 				<p class="text-base md:text-2xl text-center mb-8">Réservez un service de nettoyage professionnel à domicile en<br class="hidden lg:block">quelques minutes. Des experts qualifiés, des résultats garantis.</p>
 				<div class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-					<a href="#" class="bg-vertBase hover:bg-vertBase/80 text-white px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
+					<a href="#" class="bg-vertBase hover:bg-vertBase/80 text-white  px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
 						Reservez maintenant
 					</a>
 
-					<a href="#" class="bg-teal-200 hover:bg-vertBase/80 text-vertBase px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
+					<a href="#" class="bg-teal-200 hover:bg-vertBase/80 text-vertBase hover:text-white px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
 						Nos services
 					</a>
 				</div>
@@ -36,31 +36,109 @@
 
         <div class="mt-8 flex flex-col items-center md:flex-row md:justify-center md:space-x-6 space-y-6 md:space-y-0">
             <!-- Réservation facile -->
-            <div class="bg-white p-6 shadow-md rounded-lg w-full max-w-sm text-center">
-                <div class="flex justify-center mb-4">
-                    <img src="{{ asset('img/calendrier.png') }}" alt="Calendrier" />
+            <div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300">
+                <div class="flex justify-center mb-4 h-20">
+                    <img src="{{ asset('img/calendrier.png') }}" alt="Calendrier" class="h-full w-auto object-contain" />
                 </div>
                 <h3 class="font-semibold text-lg">Réservation facile</h3>
                 <p class="text-gray-600 mt-2">Réservez en ligne en quelques minutes pour le jour qui vous convient.</p>
             </div>
 
             <!-- Service ponctuel -->
-            <div class="bg-white p-6 shadow-md rounded-lg w-full max-w-sm text-center">
-                <div class="flex justify-center mb-4">
-                    <img src="{{ asset('img/horloge.png') }}" alt="Horloge" />
+            <div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300">
+                <div class="flex justify-center mb-4 h-20">
+                    <img src="{{ asset('img/horloge.png') }}" alt="Horloge" class="h-full w-auto object-contain" />
                 </div>
                 <h3 class="font-semibold text-lg">Service ponctuel</h3>
                 <p class="text-gray-600 mt-2">Nos professionnels arrivent à l’heure convenue, respectant votre emploi du temps.</p>
             </div>
 
             <!-- Qualité garantie -->
-            <div class="bg-white p-6 shadow-md rounded-lg w-full max-w-sm text-center">
-                <div class="flex justify-center mb-4">
-                    <img src="{{ asset('img/verifier.png') }}" alt="Qualité garantie" />
+            <div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300">
+                <div class="flex justify-center mb-4 h-20">
+                    <img src="{{ asset('img/verifier.png') }}" alt="Qualité garantie" class="h-full w-auto object-contain" />
                 </div>
                 <h3 class="font-semibold text-lg">Qualité garantie</h3>
                 <p class="text-gray-600 mt-2">Satisfaction garantie ou nous revenons gratuitement pour corriger.</p>
             </div>
         </div>
     </section>
+
+
+
+    <section class="py-12 px-6 text-center bg-gray-50">
+    <h2 class="text-2xl font-semibold text-gray-900">Comment ça marche</h2>
+    <p class="text-gray-600 mt-2">Un processus simple en trois étapes pour un intérieur impeccable</p>
+
+    <div class="container mx-auto mt-8 flex flex-col md:flex-row items-center justify-center md:space-x-20 space-y-12 md:space-y-0">
+        <!-- Étape 1 -->
+        <div class="max-w-xs text-center">
+            <div class="w-24 h-24 mx-auto flex items-center justify-center bg-teal-100 rounded-full shadow-md">
+                <img src="{{ asset('img/calendrier2.png') }}" alt="Réservez en ligne" class="w-12 h-12 object-contain">
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mt-4">Réservez en ligne</h3>
+            <p class="text-gray-600 mt-2">Choisissez la date, l’heure et le type de service qui vous convient en quelques clics.</p>
+        </div>
+
+        <!-- Étape 2 -->
+        <div class="max-w-xs text-center">
+            <div class="w-24 h-24 mx-auto flex items-center justify-center bg-teal-100 rounded-full">
+                <img src="{{ asset('img/utilisateur-valide.png') }}" alt="Rencontrez votre professionnel" class="w-12 h-12">
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mt-4">Rencontrez votre professionnel</h3>
+            <p class="text-gray-600 mt-2">Un expert qualifié arrive selon votre demande & à l’heure convenue.</p>
+        </div>
+
+        <!-- Étape 3 -->
+        <div class="max-w-xs text-center">
+            <div class="w-24 h-24 mx-auto flex items-center justify-center bg-teal-100 rounded-full">
+                <img src="{{ asset('img/maison-simple-mince.png') }}" alt="Profitez d’un intérieur impeccable" class="w-12 h-12">
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mt-4">Profitez d’un intérieur impeccable</h3>
+            <p class="text-gray-600 mt-2">Détendez-vous dans un espace fraîchement nettoyé et profitez du confort.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 px-6 text-center bg-white">
+    <h2 class="text-3xl font-semibold text-gray-900 mb-3">Nos services</h2>
+    <p class="text-gray-600 mt-2 mb-8">Des solutions adaptées à tous vos besoins de nettoyage</p>
+
+    <div class="container mx-auto mt-12 flex flex-col items-center md:items-stretch md:flex-row md:justify-center gap-8 px-4">
+        <!-- Carte Service 1 -->
+        <div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <div class="flex-grow">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Nettoyage standard</h3>
+                <p class="text-gray-600 mt-2">Un nettoyage minutieux de votre intérieur incluant dépoussiérage, aspiration, lavage des sols et surfaces.</p>
+            </div>
+            <a href="#" class="mt-6 inline-block bg-vertBase text-white px-6 py-3 rounded-md font-semibold hover:bg-vertBase/80 transition-colors duration-300">
+                Réserver maintenant
+            </a>
+        </div>
+
+        <!-- Carte Service 2 -->
+        <div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <div class="flex-grow">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Nettoyage en profondeur</h3>
+                <p class="text-gray-600 mt-2">Idéal après un déménagement ou un entretien ponctuel intensif, avec des résultats impeccables.</p>
+            </div>
+            <a href="#" class="mt-6 inline-block bg-vertBase text-white px-6 py-3 rounded-md font-semibold hover:bg-vertBase/80 transition-colors duration-300">
+                Réserver maintenant
+            </a>
+        </div>
+
+        <!-- Carte Service 3 -->
+        <div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <div class="flex-grow">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Nettoyage personnalisé</h3>
+                <p class="text-gray-600 mt-2">Service flexible adapté à vos besoins spécifiques : grand ménage, nettoyage après travaux, etc.</p>
+            </div>
+            <a href="#" class="mt-6 inline-block bg-vertBase text-white px-6 py-3 rounded-md font-semibold hover:bg-vertBase/80 transition-colors duration-300">
+                Réserver maintenant
+            </a>
+        </div>
+    </div>
+</section>
+
+    
 {% endblock %}
