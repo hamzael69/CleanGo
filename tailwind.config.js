@@ -11,7 +11,7 @@ module.exports = {
         vertBase: '#3AA89E',
       },
       backgroundImage: {
-        'hero': "url('../img/baniere.jpg')",
+        'hero': "url('../img/test.jpg')",
       },
     },
   },

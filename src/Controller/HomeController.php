@@ -14,4 +14,20 @@ final class HomeController extends AbstractController{
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/register', name: 'app_register')]
+    public function register(): Response
+    {
+        return $this->render('authentification/register.html.twig');
+    }
+
+    #[Route('/connexion', name: 'app_connexion')]
+    public function connexion(): Response
+    {
+        return $this->render('authentification/connexion.html.twig');
+    }
+
+
+
+
 }
