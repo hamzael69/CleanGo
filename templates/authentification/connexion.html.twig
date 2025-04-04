@@ -1,181 +1,106 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'base.html.twig' %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connexion - CleanGo</title>
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#3AA89E',secondary:'#f0f9f7'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
-<style>
-:where([class^="ri-"])::before { content: "\f3c2"; }
-body {
-background-color: #ffffff;
-min-height: 100vh;
-font-family: 'Poppins', sans-serif;
-}
-input[type="checkbox"] {
-appearance: none;
--webkit-appearance: none;
-width: 18px;
-height: 18px;
-border: 2px solid #d1d5db;
-border-radius: 4px;
-outline: none;
-cursor: pointer;
-position: relative;
-}
-input[type="checkbox"]:checked {
-background-color: #3AA89E;
-border-color: #3AA89E;
-}
-input[type="checkbox"]:checked::after {
-content: "";
-position: absolute;
-top: 3px;
-left: 6px;
-width: 4px;
-height: 8px;
-border: solid white;
-border-width: 0 2px 2px 0;
-transform: rotate(45deg);
-}
-.input-with-icon {
-position: relative;
-}
-.input-with-icon input {
-padding-left: 40px;
-}
-.input-with-icon .icon {
-position: absolute;
-left: 12px;
-top: 50%;
-transform: translateY(-50%);
-color: #9ca3af;
-}
-.password-toggle {
-position: absolute;
-right: 12px;
-top: 50%;
-transform: translateY(-50%);
-color: #9ca3af;
-cursor: pointer;
-}
-.separator {
-display: flex;
-align-items: center;
-text-align: center;
-color: #6b7280;
-}
-.separator::before,
-.separator::after {
-content: '';
-flex: 1;
-border-bottom: 1px solid #e5e7eb;
-}
-.separator::before {
-margin-right: 1em;
-}
-.separator::after {
-margin-left: 1em;
-}
-.login-container {
-background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%);
-backdrop-filter: blur(5px);
-}
-.form-container {
-backdrop-filter: blur(5px);
-background-color: rgba(255, 255, 255, 0.9);
-}
-</style>
-</head>
-<body class="flex flex-col items-center justify-center">
-<div class="fixed inset-0 z-0">
-<img src="https://public.readdy.ai/ai/img_res/1385a5712a57f536ad21f00d0ef460ad.jpg" alt="Modern Interior" class="w-full h-full object-cover object-center">
-</div>
-<header class="w-full flex items-center justify-between p-6 absolute top-0 z-10">
-<a href="#" class="flex items-center">
-<span class="font-['Pacifico'] text-primary text-3xl drop-shadow-md">CleanGo</span>
-</a>
-</header>
-<main class="flex items-center justify-center w-full min-h-screen z-10">
-<div class="w-full max-w-md flex rounded-xl overflow-hidden shadow-2xl">
-<div class="w-full bg-white bg-opacity-95 p-8 md:p-10">
-<div class="mb-8">
-<h1 class="text-3xl font-bold text-gray-800 mb-2">Bienvenue sur CleanGo</h1>
-<p class="text-gray-600">Connectez-vous à votre compte</p>
-</div>
-<form class="space-y-6">
-<div class="input-with-icon">
-<div class="icon w-5 h-5 flex items-center justify-center">
-<i class="ri-mail-line"></i>
-</div>
-<input type="email" placeholder="Adresse e-mail" class="w-full h-12 px-4 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required>
-</div>
-<div class="input-with-icon">
-<div class="icon w-5 h-5 flex items-center justify-center">
-<i class="ri-lock-line"></i>
-</div>
-<input type="password" id="password" placeholder="Mot de passe" class="w-full h-12 px-4 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required>
-<div class="password-toggle w-5 h-5 flex items-center justify-center" onclick="togglePassword()">
-<i class="ri-eye-line" id="password-toggle-icon"></i>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<div class="flex items-center">
-<input type="checkbox" id="remember" class="mr-2">
-<label for="remember" class="text-sm text-gray-600 cursor-pointer">Se souvenir de moi</label>
-</div>
-<a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">Mot de passe oublié ?</a>
-</div>
-<button type="submit" class="w-full h-12 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition-colors flex items-center justify-center whitespace-nowrap !rounded-button shadow-md">
-Se connecter
-</button>
-</form>
-<div class="separator my-6">ou</div>
-<div class="space-y-4">
-<button class="w-full h-12 border border-gray-300 rounded-button flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap !rounded-button">
-<div class="w-5 h-5 mr-3 flex items-center justify-center">
-<i class="ri-google-fill"></i>
-</div>
-Continuer avec Google
-</button>
-<button class="w-full h-12 border border-gray-300 rounded-button flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap !rounded-button">
-<div class="w-5 h-5 mr-3 flex items-center justify-center">
-<i class="ri-facebook-fill"></i>
-</div>
-Continuer avec Facebook
-</button>
-</div>
-<div class="text-center mt-8">
-<p class="text-gray-600">
-Vous n'avez pas de compte ?
-<a href="#" class="text-primary hover:text-primary/80 transition-colors font-medium">Créer un compte</a>
-</p>
-</div>
-</div>
-</div>
-</main>
-<script>
-function togglePassword() {
-const passwordInput = document.getElementById('password');
-const passwordToggleIcon = document.getElementById('password-toggle-icon');
-if (passwordInput.type === 'password') {
-passwordInput.type = 'text';
-passwordToggleIcon.classList.remove('ri-eye-line');
-passwordToggleIcon.classList.add('ri-eye-off-line');
-} else {
-passwordInput.type = 'password';
-passwordToggleIcon.classList.remove('ri-eye-off-line');
-passwordToggleIcon.classList.add('ri-eye-line');
-}
-}
-</script>
-</body>
-</html>
+{% block title %}Connexion à votre espace CleanGo - Service de nettoyage professionnel{% endblock %}
+
+{% block body %}
+    {# Ajout de meta descriptions spécifiques #}
+    <div class="sr-only">
+        <h1>Connexion à votre espace client CleanGo</h1>
+        <p>Accédez à votre espace personnel CleanGo pour gérer vos services de nettoyage et réservations</p>
+    </div>
+
+    <div class="absolute inset-0 w-full h-full" role="img" aria-label="Arrière-plan décoratif montrant un intérieur propre">
+        <img src="{{ asset('img/rawe.jpg') }}" 
+            alt="Intérieur moderne et propre représentant la qualité de service CleanGo" 
+            class="w-full h-full object-cover object-center"
+            loading="eager"
+        >
+        <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+    </div>
+
+    <main class="relative min-h-screen flex flex-col items-center justify-center w-full px-4" role="main">
+        <section class="w-full max-w-md bg-white bg-opacity-90 rounded-xl shadow-2xl p-8 md:p-10" aria-labelledby="login-title">
+            <header>
+                <h2 id="login-title" class="text-3xl font-bold text-gray-800">Bienvenue sur CleanGo</h2>
+                <p class="text-gray-600">Connectez-vous à votre compte</p>
+            </header>
+
+            <form method="post" class="space-y-6" role="form" aria-labelledby="login-form">
+                <div class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">
+                            Adresse email
+                        </label>
+                        <div class="mt-1 relative group">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <img src="{{ asset('img/email.png') }}" 
+                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
+                                    alt="Email icon"
+                                >
+                            </div>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] 
+                                bg-white/50  transition-all duration-200
+                                text-gray-900 placeholder-gray-400"
+                                placeholder="vous@exemple.com"
+                                value=""
+                            />
+                        </div>
+                    </div>
+
+                <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">
+                            Mot de passe
+                        </label>
+                        <div class="mt-1 relative group">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <img src="{{ asset('img/cadenas.png') }}" 
+                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
+                                    alt="Password icon"
+                                >
+                            </div>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] 
+                                bg-white/50  transition-all duration-200
+                                text-gray-900 placeholder-gray-400"
+                                placeholder="••••••••"
+                            />
+                        </div>
+                    </div>
+
+                <div class="flex items-center text-sm">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" name="_remember_me" class="mr-2 w-4 h-4 border-gray-300 text-[#3AA89E] focus:ring-[#3AA89E] rounded">
+                        <label for="remember" class="text-gray-600">Se souvenir de moi</label>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="w-full h-12 bg-[#3AA89E] text-white rounded-lg font-medium hover:bg-[#3AA89E]/90 transition-colors shadow">
+                    Se connecter
+                </button>
+            </form>
+
+            <nav class="text-center mt-8 text-sm text-gray-600" aria-label="Navigation alternative">
+                <p>
+                    Vous n'avez pas de compte ?
+                    <a href="{{ path('app_register') }}" 
+                       class="text-[#3AA89E] font-medium hover:underline"
+                       rel="nofollow">
+                        Créer un compte
+                    </a>
+                </p>
+            </nav>
+        </section>
+    </main>
+{% endblock %}

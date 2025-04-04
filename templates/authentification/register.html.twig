@@ -1,47 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription - CleanGo{% endblock %}
+{% block title %}Inscription | CleanGo - Créez votre compte et profitez de nos services de nettoyage{% endblock %}
 
 {% block body %}
-<main class="min-h-screen bg-[#F4F7FE] flex" role="main">
-    {# Section gauche avec l'image #}
-    <section class="hidden lg:flex lg:w-1/2 relative overflow-hidden" aria-hidden="true">
-        <img
-            src="{{ asset('img/femme.avif') }}"
-            alt="Bureau propre et lumineux"
-            class="object-cover w-full h-full"
-            width="1950"
-            height="1300"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-[#3AA89E]/90 to-[#2C8278]/90 mix-blend-multiply"></div>
-        <div class="absolute inset-0 flex items-center justify-center p-12">
-            <div class="text-white space-y-6 max-w-xl">
-                <h1 class="text-5xl font-bold">CleanGo</h1>
-                <p class="text-xl opacity-90">
-                    Votre partenaire de confiance pour un environnement impeccable
-                </p>
-            </div>
-        </div>
-    </section>
+    <div class="sr-only">
+        <h1>Inscription sur CleanGo - Service professionnel de nettoyage</h1>
+        <p>Créez votre compte pour accéder à nos services de nettoyage et bénéficier d'offres personnalisées</p>
+    </div>
 
-    {# Section droite avec le formulaire #}
-    <section class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12">
-        <div class="w-full max-w-md space-y-8">
-            <div class="text-center lg:text-left">
-                <div class="flex justify-center lg:justify-start">
-                    <div class="bg-[#3AA89E]/10 p-3 rounded-xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#3AA89E]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
-                    </div>
-                </div>
-                <h2 class="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-                    Bienvenue
-                </h2>
-                <p class="mt-2 text-sm text-gray-600">
-                    Inscrivez-vous pour accéder à votre espace
-                </p>
-            </div>
+    <div class="absolute inset-0 w-full h-full" role="img" aria-label="Arrière-plan décoratif montrant un intérieur propre">
+        <img src="{{ asset('img/nono.jpg') }}" alt="Intérieur moderne et propre représentant la qualité de service CleanGo" class="w-full h-full object-cover object-center" loading="eager">
+        <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+    </div>
 
-            <form method="post" class="mt-8 space-y-6" aria-label="Formulaire d'inscription">
+    <main class="relative min-h-screen flex flex-col items-center justify-center w-full px-4" role="main">
+        <section class="w-full max-w-md bg-white bg-opacity-90 rounded-xl shadow-2xl p-8 md:p-10" aria-labelledby="register-title">
+            <header class="mb-8">
+                <h2 id="register-title" class="text-3xl font-bold text-gray-800">Créez votre compte</h2>
+                <p class="text-gray-600">Rejoignez CleanGo pour un service sur mesure</p>
+            </header>
+
+            <form method="post" class="mt-8 space-y-6" role="form" aria-label="Formulaire d'inscription">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 <div class="space-y-4">
@@ -51,23 +30,12 @@
                         </label>
                         <div class="mt-1 relative group">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <img src="{{ asset('img/email.png') }}" 
-                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
-                                    alt="Email icon"
-                                >
+                                <img src="{{ asset('img/email.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Email icon">
                             </div>
-                            <input
-                                id="email"
-                                name="email"
-                                type="email"
-                                required
-                                class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl 
-                                focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] 
-                                bg-white/50  transition-all duration-200
-                                text-gray-900 placeholder-gray-400"
-                                placeholder="vous@exemple.com"
-                                value=""
-                            />
+                            <input id="email" name="email" type="email" required class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl
+                                                            focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E]
+                                                            bg-white/50  transition-all duration-200
+                                                            text-gray-900 placeholder-gray-400" placeholder="vous@exemple.com" value=""/>
                         </div>
                     </div>
 
@@ -77,97 +45,76 @@
                         </label>
                         <div class="mt-1 relative group">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <img src="{{ asset('img/cadenas.png') }}" 
-                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
-                                    alt="Password icon"
-                                >
+                                <img src="{{ asset('img/cadenas.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Password icon">
                             </div>
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                required
-                                class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl 
-                                focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] 
-                                bg-white/50  transition-all duration-200
-                                text-gray-900 placeholder-gray-400"
-                                placeholder="••••••••"
-                            />
+                            <input id="password" name="password" type="password" required class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl
+                                                            focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E]
+                                                            bg-white/50  transition-all duration-200
+                                                            text-gray-900 placeholder-gray-400" placeholder="••••••••"/>
                         </div>
                     </div>
 
-
-                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">
+                    <div>
+                        <label for="confirm_password" class="block text-sm font-medium text-gray-700">
                             Confirmer votre mot de passe
                         </label>
                         <div class="mt-1 relative group">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <img src="{{ asset('img/cadenas.png') }}" 
-                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
-                                    alt="Password icon"
-                                >
+                                <img src="{{ asset('img/cadenas.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Password confirmation icon">
                             </div>
                             <input
-                                id="password"
-                                name="password"
+                                id="confirm_password"
+                                name="confirm_password"
                                 type="password"
                                 required
+                                aria-describedby="password-requirements"
                                 class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl 
                                 focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] 
-                                bg-white/50  transition-all duration-200
+                                bg-white/50 transition-all duration-200
                                 text-gray-900 placeholder-gray-400"
                                 placeholder="••••••••"
                             />
                         </div>
                     </div>
-
-
-
                 </div>
+
+                
 
                 <div class="space-y-4">
                     <div class="flex items-center">
-                        <input
-                            id="accept_terms"
-                            name="accept_terms"
-                            type="checkbox"
-                            required
-                            class="h-4 w-4 text-[#3AA89E] focus:ring-[#3AA89E] border-gray-300 rounded"
-                            aria-required="true"
-                        />
+                        <input id="accept_terms" name="accept_terms" type="checkbox" required class="h-4 w-4 text-[#3AA89E] focus:ring-[#3AA89E] border-gray-300 rounded" aria-required="true"/>
                         <label for="accept_terms" class="ml-2 block text-sm text-gray-700">
-                            J'accepte les <a href="#" class="text-[#3AA89E] hover:text-[#2C8278]">conditions générales d'utilisation</a> et la <a href="#" class="text-[#3AA89E] hover:text-[#2C8278]">politique de confidentialité</a>
+                            J'accepte les
+                            <a href="#" class="text-[#3AA89E] hover:text-[#2C8278]">conditions générales d'utilisation</a>
+                            et la
+                            <a href="#" class="text-[#3AA89E] hover:text-[#2C8278]">politique de confidentialité</a>
                         </label>
                     </div>
-
-                    
                 </div>
 
-                <button
-                    type="submit"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent 
-                    rounded-xl text-sm font-medium text-white bg-[#3AA89E] 
-                    hover:bg-[#2C8278] focus:outline-none focus:ring-2 
-                    focus:ring-offset-2 focus:ring-[#3AA89E]
-                    transition-all duration-200
-                    shadow-lg shadow-[#3AA89E]/20 hover:shadow-xl hover:shadow-[#3AA89E]/30"
-                >
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent
+                                        rounded-xl text-sm font-medium text-white bg-[#3AA89E]
+                                        hover:bg-[#2C8278] focus:outline-none focus:ring-2
+                                        focus:ring-offset-2 focus:ring-[#3AA89E]
+                                        transition-all duration-200
+                                        shadow-lg shadow-[#3AA89E]/20 hover:shadow-xl hover:shadow-[#3AA89E]/30">
                     S'inscrire
                 </button>
 
                 <p class="text-center text-xs text-gray-500">
-                    En vous inscrivant, vous acceptez que vos données personnelles soient traitées conformément à notre <a href="#" class="text-[#3AA89E] hover:text-[#2C8278]">politique de confidentialité</a>
+                    En vous inscrivant, vous acceptez que vos données personnelles soient traitées conformément à notre
+                    <a href="#" class="text-[#3AA89E] hover:text-[#2C8278]">politique de confidentialité</a>
                 </p>
             </form>
 
-            <div class="text-center text-sm text-gray-600">
-                Déjà membre ?
-                <a href="" class="font-medium text-[#3AA89E] hover:text-[#2C8278] transition-colors">
-                    Connectez-vous
-                </a>
-            </div>
-        </div>
-    </section>
-</main>
+            <nav class="text-center mt-8 text-sm text-gray-600" aria-label="Navigation secondaire">
+                <p>
+                    Déjà membre ?
+                    <a href="" class="font-medium text-[#3AA89E] hover:text-[#2C8278] transition-colors">
+                        Connectez-vous
+                    </a>
+                </p>
+            </nav>
+        </section>
+    </main>
 {% endblock %}
