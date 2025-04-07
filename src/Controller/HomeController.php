@@ -27,6 +27,12 @@ final class HomeController extends AbstractController{
         return $this->render('authentification/connexion.html.twig');
     }
 
+    #[Route('/contact', name: 'app_contact')]
+    public function contact(): Response
+    {
+        return $this->render('authentification/contact.html.twig');
+    }
+
 
 
 

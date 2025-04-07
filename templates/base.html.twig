@@ -36,11 +36,11 @@
 					<a href="{{ path('app_home') }}" data-turbo="false" class="text-vertBase font-semibold hover:text-white transition-all duration-300">Accueil</a>
 					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Services</a>
 					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Contact</a>
-					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Se connecter</a>
+					<a href="{{path('app_connexion')}}" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Se connecter</a>
 				</div>
 
 				{# Bouton Menu Burger #}
-				<button id="menu-btn" class="block xl:hidden w-10 h-10 relative focus:outline-none z-[1000] cursor-pointer">
+				<button id="menu-btn" class="block xl:hidden w-10 h-10 relative focus:outline-none z-[1000] cursor-pointer ">
 					<span id="burger-top" class="absolute w-8 h-0.5 bg-vertBase/80 transform transition-all duration-500 -translate-x-1/2 left-1/2"></span>
 					<span id="burger-middle" class="absolute w-8 h-0.5 bg-vertBase/80 transform transition-all duration-500 -translate-x-1/2 left-1/2 top-1/2"></span>
 					<span id="burger-bottom" class="absolute w-8 h-0.5 bg-vertBase/80 transform transition-all duration-500 -translate-x-1/2 left-1/2"></span>
@@ -60,7 +60,7 @@
 								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Contact</a>
 							</li>
 							<li>
-								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Se connecter</a>
+								<a href="{{path('app_connexion')}}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Se connecter</a>
 							</li>
 						</ul>
 					</div>

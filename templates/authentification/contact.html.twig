@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - CleanGo | Service de nettoyage professionnel{% endblock %}
+
+{% block body %}
+
+<div class="min-h-screen relative bg-cover bg-center flex items-center justify-center" 
+     style="background-image: url('{{ asset('img/vite.jpg') }}');">
+    
+    <div class="min-h-screen bg-black/40 w-full flex items-center">
+        <main class="w-full max-w-7xl mx-auto px-4 py-24 mt-20">
+            <div class="grid md:grid-cols-2 gap-12">
+                {# Carte de contact simplifiée #}
+                <article class="space-y-8 bg-white/90 p-8 rounded-xl shadow-xl">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-[#3AA89E]">Contactez-nous</h2>
+                        <p class="text-gray-700 mt-4">Besoin d'un service de ménage professionnel ? Notre équipe est là pour vous accompagner.</p>
+                    </div>
+
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex items-center space-x-4">
+                            <img aria-hidden="true" class="w-5 h-5 " src="{{asset('img/tel.png')}}">
+                            </img>
+                            <span><a href="tel:0123456789" class="hover:text-[#3AA89E] transition-colors">01 23 45 67 89</a></span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <img aria-hidden="true" class="w-5 h-5 " src="{{asset('img/enveloppe.png')}}">
+                            <span><a href="mailto:contact@cleango.fr" class="hover:text-[#3AA89E] transition-colors">contact@cleango.fr</a></span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <img aria-hidden="true" class="w-5 h-5 " src="{{asset('img/epingle.png')}}">
+                            <span>123 Avenue des Champs-Élysées, Paris</span>
+                        </div>
+                    </div>
+                </article>
+
+                {# Formulaire simplifié #}
+                <div class="bg-white/90 rounded-xl shadow-xl p-8">
+                    <form method="post" class="space-y-6">
+                        <div class="form-group">
+                            <label for="nom" class="block text-sm font-medium text-gray-700">Nom complet</label>
+                            <input
+                                type="text"
+                                id="nom"
+                                name="nom"
+                                autocomplete="name"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#3AA89E] focus:ring-[#3AA89E] bg-white/50 px-4 py-2"
+                                required
+                                aria-required="true"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                autocomplete="email"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#3AA89E] focus:ring-[#3AA89E] bg-white/50 px-4 py-2"
+                                required
+                                aria-required="true"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telephone" class="block text-sm font-medium text-gray-700">Téléphone</label>
+                            <input
+                                type="tel"
+                                id="telephone"
+                                name="telephone"
+                                autocomplete="tel"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#3AA89E] focus:ring-[#3AA89E] bg-white/50 px-4 py-2"
+                                required
+                                aria-required="true"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="4"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#3AA89E] focus:ring-[#3AA89E] bg-white/50 px-4 py-2"
+                                required
+                                aria-required="true"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full flex justify-center items-center space-x-2 bg-[#3AA89E] hover:bg-opacity-90 text-white font-medium py-3 px-4 rounded-md transition duration-150 ease-in-out shadow-lg"
+                        >
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            <span>Envoyer le message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
