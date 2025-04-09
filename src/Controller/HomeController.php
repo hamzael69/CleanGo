@@ -32,6 +32,18 @@ final class HomeController extends AbstractController{
     {
         return $this->render('authentification/contact.html.twig');
     }
+    #[Route('/profil', name: 'app_profil')]
+    public function profil(): Response
+    {
+        return $this->render('authentification/profil.html.twig');
+    }
+
+
+    #[Route('/reservez', name: 'app_reservez')]
+    public function reservez(): Response
+    {
+        return $this->render('authentification/reservez.html.twig');
+    }
 
 
 

@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation de service de nettoyage - CleanGo | Planifiez votre nettoyage{% endblock %}
+
+{% block body %}
+    <main class="min-h-screen bg-volvic bg-cover bg-center">
+        <div class="min-h-screen bg-black/50">
+            <main class="container mx-auto px-4 py-8" role="main">
+                <section class="max-w-2xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mt-14" >
+                    <div>
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                            Réserver votre nettoyage
+                        </h2>
+                    </div>
+
+                    <form method="POST" class="space-y-6">
+                        <fieldset>
+                            <legend class="sr-only">Détails du service</legend>
+                            {# Type de service #}
+                            <div class="space-y-2">
+                                <label for="serviceType" class="text-gray-700 font-medium flex items-center">
+                                    Type de Service
+                                </label>
+                                <select name="serviceType" id="serviceType" required
+                                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                                    <option value="">Sélectionnez un service</option>
+                                    <option value="Nettoyage Standard">Nettoyage Standard</option>
+                                    <option value="Nettoyage Profond">Nettoyage Profond</option>
+                                    <option value="Nettoyage de Fin de Bail">Nettoyage de Fin de Bail</option>
+                                    <option value="Nettoyage après Travaux">Nettoyage après Travaux</option>
+                                    <option value="Nettoyage de Vitres">Nettoyage de Vitres</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Date et horaires</legend>
+                            <div class="space-y-4">
+                                {# Date #}
+                                <div class="space-y-2">
+                                    <label for="date" class="text-gray-700 font-medium flex items-center">Date</label>
+                                    <input type="date" name="date" id="date" required
+                                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                                </div>
+
+                                {# Heures #}
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label for="startTime" class="text-gray-700 font-medium flex items-center">Heure de début</label>
+                                        <input type="time" name="startTime" id="startTime" required
+                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label for="endTime" class="text-gray-700 font-medium flex items-center">Heure de fin</label>
+                                        <input type="time" name="endTime" id="endTime" required
+                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Informations sur le logement</legend>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label for="rooms" class="text-gray-700 font-medium flex items-center">Nombre de pièces</label>
+                                    <input type="number" min="1" name="rooms" id="rooms" value="1" required
+                                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="squareMeters" class="text-gray-700 font-medium flex items-center">Surface totale (m²)</label>
+                                    <input type="number" min="0" name="squareMeters" id="squareMeters" required
+                                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Informations de tarification</legend>
+                            <div class="space-y-2">
+                                <label for="proposedPrice" class="text-gray-700 font-medium flex items-center">Prix Proposé (€)</label>
+                                <input type="number" min="0" step="0.01" name="proposedPrice" id="proposedPrice" required
+                                       placeholder="Proposez votre prix"
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]">
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Instructions spécifiques</legend>
+                            <div class="space-y-2">
+                                <label for="description" class="text-gray-700 font-medium">Instructions particulières</label>
+                                <textarea 
+                                    name="description" 
+                                    id="description"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E] h-32 resize-none"
+                                    placeholder="Accès au logement, spécificités à prendre en compte..."
+                                    aria-describedby="description-help"
+                                ></textarea>
+                                <p id="description-help" class="text-sm text-gray-500">
+                                    Ajoutez toute information utile pour le bon déroulement de l'intervention
+                                </p>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit"
+                                class="w-full bg-[#3AA89E] text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-200 font-medium">
+                            Confirmer la réservation
+                        </button>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </main>
+{% endblock %}

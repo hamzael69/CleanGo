@@ -13,6 +13,8 @@ module.exports = {
       backgroundImage: {
         'hero': "url('../img/test.jpg')",
         'coco': "url('../img/rawe.jpg')",
+        'spurs': "url('../img/spurs.webp')",
+        'volvic': "url('../img/volvic.avif')",
       },
     },
   },
