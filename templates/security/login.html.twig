@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion à votre espace CleanGo - Service de nettoyage professionnel{% endblock %}
+
+{% block body %}
+    {# Ajout de meta descriptions spécifiques #}
+    <div class="sr-only">
+        <h1>Connexion à votre espace client CleanGo</h1>
+        <p>Accédez à votre espace personnel CleanGo pour gérer vos services de nettoyage et réservations</p>
+    </div>
+
+    <div class="absolute inset-0 w-full h-full" role="img" aria-label="Arrière-plan décoratif montrant un intérieur propre">
+        <img src="{{ asset('img/rawe.jpg') }}" 
+            alt="Intérieur moderne et propre représentant la qualité de service CleanGo" 
+            class="w-full h-full object-cover object-center"
+            loading="eager"
+        >
+        <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+    </div>
+
+    <main class="relative min-h-screen flex flex-col items-center justify-center w-full px-4" role="main">
+        <section class="w-full max-w-md bg-white bg-opacity-90 rounded-xl shadow-2xl p-8 md:p-10" aria-labelledby="login-title">
+            <header>
+                <h2 id="login-title" class="text-3xl font-bold text-gray-800">Bienvenue sur CleanGo</h2>
+                <p class="text-gray-600">Connectez-vous à votre compte</p>
+            </header>
+
+            <form method="post" class="space-y-6" role="form">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700">Adresse email</label>
+                        <div class="mt-1 relative group">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <img src="{{ asset('img/email.png') }}" 
+                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
+                                    alt="Email icon"
+                                >
+                            </div>
+                            <input type="email" value="{{ last_username }}" name="_username" id="username" class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/50 transition-all duration-200 text-gray-900 placeholder-gray-400" autocomplete="email" required autofocus>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                        <div class="mt-1 relative group">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <img src="{{ asset('img/cadenas.png') }}" 
+                                    class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" 
+                                    alt="Password icon"
+                                >
+                            </div>
+                            <input type="password" name="_password" id="password" class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/50 transition-all duration-200 text-gray-900 placeholder-gray-400" autocomplete="current-password" required>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div class="flex items-center text-sm">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" name="_remember_me" class="mr-2 w-4 h-4 border-gray-300 text-[#3AA89E] focus:ring-[#3AA89E] rounded">
+                        <label for="remember" class="text-gray-600">Se souvenir de moi</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full h-12 bg-[#3AA89E] text-white rounded-lg font-medium hover:bg-[#3AA89E]/90 transition-colors shadow">
+                    Se connecter
+                </button>
+            </form>
+
+            <nav class="text-center mt-8 text-sm text-gray-600" aria-label="Navigation alternative">
+                <p>
+                    Vous n'avez pas de compte ?
+                    <a href="{{ path('app_register') }}" 
+                       class="text-[#3AA89E] font-medium hover:underline"
+                       rel="nofollow">
+                        Créer un compte
+                    </a>
+                </p>
+            </nav>
+        </section>
+    </main>
+{% endblock %}
