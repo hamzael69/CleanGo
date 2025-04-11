@@ -1,23 +1,86 @@
-{# {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %} #}
+{% block title %}Inscription | CleanGo - Créez votre compte et profitez de nos services de nettoyage{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div class="sr-only">
+        <h1>Inscription sur CleanGo - Service professionnel de nettoyage</h1>
+        <p>Créez votre compte pour accéder à nos services de nettoyage et bénéficier d'offres personnalisées</p>
+    </div>
 
-    <h1>Register</h1>
+    <div class="fixed inset-0 w-full h-full -z-10" role="img" aria-label="Arrière-plan décoratif montrant un intérieur propre">
+        <img src="{{ asset('img/nono.jpg') }}" alt="Intérieur moderne et propre représentant la qualité de service CleanGo" class="w-full h-full object-cover object-center" loading="eager">
+        <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+    </div>
 
-    {{ form_errors(registrationForm) }}
+    <div class="min-h-screen pt-20 pb-12 flex flex-col relative">
+        <div class="flex-grow flex items-center justify-center px-4">
+            <section class="w-full max-w-md bg-white bg-opacity-90 rounded-xl shadow-2xl p-8 md:p-10" aria-labelledby="register-title">
+                <header class="mb-8">
+                    <h2 id="register-title" class="text-3xl font-bold text-gray-800">Créez votre compte</h2>
+                    <p class="text-gray-600">Rejoignez CleanGo pour un service sur mesure</p>
+                </header>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        {{ flash_error }}
+                    </div>
+                {% endfor %}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm, {'attr': {'class': 'mt-8 space-y-6'}}) }}
+                    <div class="space-y-4">
+                        <div>
+                            {{ form_label(registrationForm.email, 'Adresse email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                            <div class="mt-1 relative group">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <img src="{{ asset('img/email.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Email icon">
+                                </div>
+                                {{ form_widget(registrationForm.email, {'attr': {
+                                    'class': 'block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/50 transition-all duration-200 text-gray-900 placeholder-gray-400',
+                                    'placeholder': 'vous@exemple.com'
+                                }}) }}
+                            </div>
+                        </div>
+
+                        <div>
+                            {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                            <div class="mt-1 relative group">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <img src="{{ asset('img/cadenas.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Password icon">
+                                </div>
+                                {{ form_widget(registrationForm.plainPassword, {'attr': {
+                                    'class': 'block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/50 transition-all duration-200 text-gray-900 placeholder-gray-400',
+                                    'placeholder': '••••••••'
+                                }}) }}
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            {{ form_widget(registrationForm.agreeTerms, {'attr': {
+                                'class': 'h-4 w-4 text-[#3AA89E] focus:ring-[#3AA89E] border-gray-300 rounded'
+                            }}) }}
+                            {{ form_label(registrationForm.agreeTerms, "J'accepte les conditions générales d'utilisation", {'label_attr': {
+                                'class': 'ml-2 block text-sm text-gray-700'
+                            }}) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl text-sm font-medium text-white bg-[#3AA89E] hover:bg-[#2C8278] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3AA89E] transition-all duration-200 shadow-lg shadow-[#3AA89E]/20 hover:shadow-xl hover:shadow-[#3AA89E]/30">
+                        S'inscrire
+                    </button>
+                {{ form_end(registrationForm) }}
+
+                <nav class="text-center mt-8 text-sm text-gray-600" aria-label="Navigation secondaire">
+                    <p>
+                        Déjà membre ?
+                        <a href="{{ path('app_login') }}" class="font-medium text-[#3AA89E] hover:text-[#2C8278] transition-colors">
+                            Connectez-vous
+                        </a>
+                    </p>
+                </nav>
+            </section>
+        </div>
+    </div>
 {% endblock %}
