@@ -39,11 +39,11 @@ final class HomeController extends AbstractController{
     // }
 
 
-    #[Route('/reservez', name: 'app_reservez')]
-    public function reservez(): Response
-    {
-        return $this->render('authentification/reservez.html.twig');
-    }
+    // #[Route('/reservez', name: 'app_reservez')]
+    // public function reservez(): Response
+    // {
+    //     return $this->render('authentification/reservez.html.twig');
+    // }
 
 
 
