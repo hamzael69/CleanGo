@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,17 @@ class Client
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, CleaningRequest>
+     */
+    #[ORM\OneToMany(targetEntity: CleaningRequest::class, mappedBy: 'client', orphanRemoval: true)]
+    private Collection $cleaningRequests;
+
+    public function __construct()
+    {
+        $this->cleaningRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +133,36 @@ class Client
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CleaningRequest>
+     */
+    public function getCleaningRequests(): Collection
+    {
+        return $this->cleaningRequests;
+    }
+
+    public function addCleaningRequest(CleaningRequest $cleaningRequest): static
+    {
+        if (!$this->cleaningRequests->contains($cleaningRequest)) {
+            $this->cleaningRequests->add($cleaningRequest);
+            $cleaningRequest->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCleaningRequest(CleaningRequest $cleaningRequest): static
+    {
+        if ($this->cleaningRequests->removeElement($cleaningRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($cleaningRequest->getClient() === $this) {
+                $cleaningRequest->setClient(null);
+            }
+        }
 
         return $this;
     }

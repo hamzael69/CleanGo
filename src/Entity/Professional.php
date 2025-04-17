@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfessionalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfessionalRepository::class)]
@@ -28,6 +30,17 @@ class Professional
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
+
+    /**
+     * @var Collection<int, CleaningRequest>
+     */
+    #[ORM\OneToMany(targetEntity: CleaningRequest::class, mappedBy: 'professional')]
+    private Collection $cleaningRequests;
+
+    public function __construct()
+    {
+        $this->cleaningRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +103,36 @@ class Professional
     public function setCity(?string $city): static
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CleaningRequest>
+     */
+    public function getCleaningRequests(): Collection
+    {
+        return $this->cleaningRequests;
+    }
+
+    public function addCleaningRequest(CleaningRequest $cleaningRequest): static
+    {
+        if (!$this->cleaningRequests->contains($cleaningRequest)) {
+            $this->cleaningRequests->add($cleaningRequest);
+            $cleaningRequest->setProfessional($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCleaningRequest(CleaningRequest $cleaningRequest): static
+    {
+        if ($this->cleaningRequests->removeElement($cleaningRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($cleaningRequest->getProfessional() === $this) {
+                $cleaningRequest->setProfessional(null);
+            }
+        }
 
         return $this;
     }
