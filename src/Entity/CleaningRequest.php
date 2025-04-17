@@ -53,9 +53,9 @@ class CleaningRequest
     #[ORM\ManyToOne(inversedBy: 'cleaningRequests')]
     private ?Professional $professional = null;
 
-    public function __construct(bool $isAccepted = false)
+    public function __construct()
     {
-        $this->isAccepted = $isAccepted;
+        $this->isAccepted = false;
         $this->date = new \DateTimeImmutable();
         $this->startTime = new \DateTimeImmutable();
         $this->endTime = new \DateTimeImmutable();
@@ -63,8 +63,8 @@ class CleaningRequest
         $this->livingSpace = 0;
         $this->price = 0;
         $this->description = '';
-    
         $this->service = new ArrayCollection();
+        $this->professional = null;
     }
 
     public function getId(): ?int

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Professional;
 
+use App\Entity\CleaningRequest;
 use App\Entity\Professional;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -55,5 +56,16 @@ class ProfessionalDashboardController extends AbstractDashboardController
     }
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+
+    if ($this->isGranted('ROLE_PROFESSIONAL')) {
+        yield MenuItem::section('Demandes de ménage');
+        yield MenuItem::linkToCrud('Voir les demandes', 'fa fa-broom', CleaningRequest::class);
     }
+    }
+
+   
+
+
 }

@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation de service de nettoyage - CleanGo | Planifiez votre nettoyage{% endblock %}
+
+{% block body %}
+    <main class="min-h-screen bg-volvic bg-cover bg-center">
+        <div class="min-h-screen bg-black/50">
+            <main class="container mx-auto px-4 py-8" role="main">
+                <section class="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 mt-14">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                            Réserver votre nettoyage
+                        </h2>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+                        <fieldset>
+                            <legend class="sr-only">Date et horaires</legend>
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    {{ form_label(form.date, 'Date', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                    {{ form_widget(form.date, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        {{ form_label(form.startTime, 'Heure de début', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                        {{ form_widget(form.startTime, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                                    </div>
+                                    <div class="space-y-2">
+                                        {{ form_label(form.endTime, 'Heure de fin', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                        {{ form_widget(form.endTime, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Informations sur le logement</legend>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    {{ form_label(form.numberOfRooms, 'Nombre de pièces', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                    {{ form_widget(form.numberOfRooms, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]', 'min': 1}}) }}
+                                </div>
+                                <div class="space-y-2">
+                                    {{ form_label(form.livingSpace, 'Surface totale (m²)', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                    {{ form_widget(form.livingSpace, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]', 'min': 0}}) }}
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Services</legend>
+                            <div class="space-y-2">
+                                {{ form_label(form.service, 'Services', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                {{ form_widget(form.service, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Informations de tarification</legend>
+                            <div class="space-y-2">
+                                {{ form_label(form.price, 'Prix Proposé (€)', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
+                                {{ form_widget(form.price, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]', 'min': 0, 'step': '0.01', 'placeholder': 'Proposez votre prix'}}) }}
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="sr-only">Instructions spécifiques</legend>
+                            <div class="space-y-2">
+                                {{ form_label(form.description, 'Instructions particulières', {'label_attr': {'class': 'text-gray-700 font-medium'}}) }}
+                                {{ form_widget(form.description, {
+                                    'attr': {
+                                        'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E] h-32 resize-none',
+                                        'placeholder': 'Accès au logement, spécificités à prendre en compte...'
+                                    }
+                                }) }}
+                                <p class="text-sm text-gray-500">
+                                    Ajoutez toute information utile pour le bon déroulement de l'intervention
+                                </p>
+                            </div>
+                        </fieldset>
+
+                        {# Champs cachés pour le client et le professionnel #}
+                        <div class="hidden">
+                            {{ form_widget(form.client) }}
+                            {{ form_widget(form.professional) }}
+                            {{ form_widget(form.isAccepted) }}
+                        </div>
+
+                        <button type="submit"
+                                class="w-full bg-[#3AA89E] text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-200 font-medium">
+                            Confirmer la réservation
+                        </button>
+
+                    {{ form_end(form) }}
+                </section>
+            </main>
+        </div>
+    </main>
+{% endblock %}
