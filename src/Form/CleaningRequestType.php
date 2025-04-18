@@ -29,21 +29,21 @@ class CleaningRequestType extends AbstractType
             ->add('livingSpace')
             ->add('price')
             ->add('description')
-            ->add('isAccepted')
             ->add('service', EntityType::class, [
                 'class' => Service::class,
-                'choice_label' => 'id',
                 'multiple' => true,
                 'expanded' => false
             ])
-            ->add('client', EntityType::class, [
-                'class' => Client::class,
-                'choice_label' => 'id',
-            ])
-            ->add('professional', EntityType::class, [
-                'class' => Professional::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('client', EntityType::class, [
+            //     'class' => Client::class,
+            //     'choice_label' => 'id',
+            //     'mapped' => false,
+            // ])
+            // ->add('professional', EntityType::class, [
+            //     'class' => Professional::class,
+            //     'choice_label' => 'id',
+            //     'mapped' => false,
+            // ])
         ;
     }
 

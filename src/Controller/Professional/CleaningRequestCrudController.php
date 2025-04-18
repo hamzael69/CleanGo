@@ -21,6 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CleaningRequestCrudController extends AbstractCrudController
 {
@@ -50,7 +51,12 @@ class CleaningRequestCrudController extends AbstractCrudController
             DateTimeField::new('startTime', 'Heure de début'),
             DateTimeField::new('endTime', 'Heure de fin'),
             AssociationField::new('client', 'Client'),
-            AssociationField::new('service', 'Services'),
+            // AssociationField::new('service', 'Services'),
+            AssociationField::new('service', 'Services')
+            ->formatValue(function ($value, $entity) {
+                /** @var \App\Entity\CleaningRequest $entity */
+                return implode(', ', $entity->getService()->map(fn($s) => $s->getName())->toArray());
+            }),
             TextEditorField::new('description', 'Description')
             // BooleanField::new('isAccepted', 'Acceptée')
         ];

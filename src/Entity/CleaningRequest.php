@@ -37,8 +37,8 @@ class CleaningRequest
     #[ORM\Column]
     private ?int $livingSpace = null;
 
-    #[ORM\Column]
-    private ?int $price = null;
+    #[ORM\Column(type: Types::FLOAT)]
+    private ?float $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -156,12 +156,12 @@ class CleaningRequest
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): static
+    public function setPrice(float $price): static
     {
         $this->price = $price;
 
