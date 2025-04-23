@@ -50,22 +50,23 @@ class ProfessionalDashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToUrl('Retour au site', 'fa fa-home', '/');
 
-    if ($this->isGranted('ROLE_PROFESSIONAL')) {
-        yield MenuItem::section('Espace Professionnel');
-        yield MenuItem::linkToCrud('Mes Informations', 'fas fa-user-edit', Professional::class);
-    }
-        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        if ($this->isGranted('ROLE_PROFESSIONAL')) {
+            yield MenuItem::section('Espace Professionnel');
+            yield MenuItem::linkToCrud('Mes Informations', 'fas fa-user-edit', Professional::class);
+        }
 
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-    if ($this->isGranted('ROLE_PROFESSIONAL')) {
-        yield MenuItem::section('Demandes de ménage');
-        yield MenuItem::linkToCrud('Voir les demandes', 'fa fa-broom', CleaningRequest::class);
+        if ($this->isGranted('ROLE_PROFESSIONAL')) {
+            yield MenuItem::section('Demandes de ménage');
+            yield MenuItem::linkToCrud('Voir les demandes', 'fa fa-broom', CleaningRequest::class);
+            // Ajout du lien vers les demandes acceptées
+            yield MenuItem::linkToCrud(
+                'Demandes acceptées',
+                'fa fa-check',
+                CleaningRequest::class
+            )->setController(\App\Controller\Professional\AcceptedCleaningRequestCrudController::class);
+        }
     }
-    }
-
-   
-
 
 }

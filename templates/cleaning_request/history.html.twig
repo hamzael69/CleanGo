@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes demandes de ménage{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-8">
+    <h2 class="text-2xl font-semibold mb-6">Mes demandes de ménage</h2>
+    <table class="min-w-full bg-white">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Heure début</th>
+                <th>Statut</th>
+                <th>Professionnel</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <tr>
+                <td>{{ request.date|date('d/m/Y') }}</td>
+                <td>{{ request.startTime|date('H:i') }}</td>
+                <td>
+                    {% if request.isAccepted %}
+                        <span class="text-green-600">Acceptée</span>
+                    {% else %}
+                        <span class="text-yellow-600">En attente</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if request.isAccepted and request.professional %}
+                        {{ request.professional.firstname }} {{ request.professional.lastname }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune demande trouvée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

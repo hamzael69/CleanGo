@@ -39,4 +39,20 @@ final class CleaningRequestController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/cleaning-request/history', name: 'cleaning_request_history')]
+public function history(Security $security, EntityManagerInterface $em): Response
+{
+    /** @var \App\Entity\User $user */
+    $user = $security->getUser();
+    $client = $user->getClient();
+
+    $requests = $em->getRepository(CleaningRequest::class)->findBy(['client' => $client]);
+
+    return $this->render('cleaning_request/history.html.twig', [
+        'requests' => $requests,
+    ]);
+}
+
+
 }
