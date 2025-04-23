@@ -43,7 +43,8 @@ class AcceptedCleaningRequestCrudController extends AbstractCrudController
             DateTimeField::new('endTime', 'Heure de fin'),
             TextField::new('client.firstname', 'Prénom du client'),
             TextField::new('client.lastname', 'Nom du client'),
-            TextField::new('client.address', 'Adresse du client'),
+            TextField::new('client.adress', 'Adresse du client'),
+            TextField::new('client.city', 'Ville du client'),
             TextField::new('client.phone', 'Téléphone du client'),
             TextEditorField::new('description', 'Description'),
         ];
