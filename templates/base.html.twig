@@ -32,11 +32,24 @@
 
 
 				{# Menu Desktop #}
-				<div class="hidden xl:flex items-center space-x-8">
-					<a href="{{ path('app_home') }}" data-turbo="false" class="text-vertBase font-semibold hover:text-white transition-all duration-300">Accueil</a>
-					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Services</a>
-					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Contact</a>
-					<a href="#" data-turbo="false" class="text-vertBase hover:text-white font-semibold transition-all duration-300">Se connecter</a>
+				<div class="hidden xl:flex items-center space-x-6">
+					<a href="{{ path('app_home') }}" data-turbo="false" class="text-white font-semibold hover:text-vertBase transition-all duration-300 whitespace-nowrap">Accueil</a>
+					{% if app.user %}
+						<a href="{{ path('cleaning_request_create') }}" data-turbo="false" class="text-white hover:text-vertBase font-semibold transition-all duration-300 whitespace-nowrap">Réservez</a>
+					{% else %}
+						<a href="{{ path('app_register') }}" data-turbo="false" class="text-white hover:text-vertBase font-semibold transition-all duration-300 whitespace-nowrap">Réservez</a>
+					{% endif %}
+					{% if app.user %}
+						<a href="{{ path('cleaning_request_history') }}" data-turbo="false" class="text-white hover:text-vertBase font-semibold transition-all duration-300 whitespace-nowrap">Mes réservations</a>
+					{% else %}
+						<a href="{{ path('app_register') }}" data-turbo="false" class="text-white hover:text-vertBase font-semibold transition-all duration-300 whitespace-nowrap">S'inscrire</a>
+					{% endif %}
+					{% if app.user %}
+						<a href="{{ path('app_client_index') }}" data-turbo="false" class="text-white hover:text-vertBase font-semibold transition-all duration-300 whitespace-nowrap">{{ app.user.client.firstname }}</a>
+						<a href="{{ path('app_logout') }}" data-turbo="false" class="text-red-400 hover:text-red-900 font-semibold transition-all duration-300 whitespace-nowrap">Se déconnecter</a>
+					{% else %}
+						<a href="{{ path('app_login') }}" data-turbo="false" class="text-white hover:text-vertBase font-semibold transition-all duration-300 whitespace-nowrap">Se connecter</a>
+					{% endif %}
 				</div>
 
 				{# Bouton Menu Burger #}
@@ -54,14 +67,31 @@
 								<a href="{{ path('app_home') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Accueil</a>
 							</li>
 							<li>
-								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Services</a>
+								{% if app.user %}
+									<a href="{{ path('cleaning_request_create') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Réservez</a>
+								{% else %}
+									<a href="{{ path('app_register') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Réservez</a>
+								{% endif %}
 							</li>
 							<li>
-								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Contact</a>
+								{% if app.user %}
+									<a href="{{ path('cleaning_request_history') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Mes réservations</a>
+								{% else %}
+									<a href="{{ path('app_register') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">S'inscrire</a>
+								{% endif %}
 							</li>
 							<li>
-								<a href="#" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Se connecter</a>
+								{% if app.user %}
+									<a href="{{ path('app_client_index') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">{{ app.user.client.firstname }}</a>
+								{% else %}
+									<a href="{{ path('app_login') }}" data-turbo="false" class="text-2xl text-gray-800 hover:text-vertBase transition-all duration-300">Se connecter</a>
+								{% endif %}
 							</li>
+							{% if app.user %}
+							<li>
+								<a href="{{ path('app_logout') }}" data-turbo="false" class="text-2xl text-red-600 hover:text-red-800 transition-all duration-300">Se déconnecter</a>
+							</li>
+							{% endif %}
 						</ul>
 					</div>
 				</div>
