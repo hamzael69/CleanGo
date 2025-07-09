@@ -2,7 +2,24 @@
 
 {% block title %}Inscription | CleanGo - Créez votre compte et profitez de nos services de nettoyage{% endblock %}
 
+{% block meta_description %}
+<meta name="description" content="Créez votre compte CleanGo pour accéder à nos services professionnels de nettoyage. Inscription rapide et sécurisée avec protection de vos données personnelles.">
+{% endblock %}
+
 {% block body %}
+    <!-- Navigation breadcrumb -->
+    {# <nav class="fixed top-0 left-0 right-0 z-40 bg-black/30 backdrop-blur-sm py-2" aria-label="Fil d'ariane">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-2 text-white/90">
+                <a href="{{ path('app_home') }}" class="hover:text-white focus:text-white focus:outline-none focus:ring-2 focus:ring-white/50 rounded-sm px-1 py-0.5 transition-colors">
+                    Accueil
+                </a>
+                <span class="text-white/60" aria-hidden="true">›</span>
+                <span class="text-white" aria-current="page">Inscription</span>
+            </div>
+        </div>
+    </nav> #}
+
     <div class="sr-only">
         <h1>Inscription sur CleanGo - Service professionnel de nettoyage</h1>
         <p>Créez votre compte pour accéder à nos services de nettoyage et bénéficier d'offres personnalisées</p>
@@ -13,73 +30,178 @@
         <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
     </div>
 
-    <div class="min-h-screen pt-20 pb-12 flex flex-col relative">
+    <div class="min-h-screen pt-24 pb-12 flex flex-col relative">
         <div class="flex-grow flex items-center justify-center px-4">
-            <section class="w-full max-w-md bg-white bg-opacity-90 rounded-xl shadow-2xl p-8 md:p-10" aria-labelledby="register-title">
-                <header class="mb-8">
-                    <h2 id="register-title" class="text-3xl font-bold text-gray-800">Créez votre compte</h2>
-                    <p class="text-gray-600">Rejoignez CleanGo pour un service sur mesure</p>
+            <section class="w-full max-w-lg bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 sm:p-8 md:p-10" aria-labelledby="register-title">
+                <header class="mb-8 text-center">
+                    <h2 id="register-title" class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Créez votre compte</h2>
+                    <p class="text-gray-600 text-sm sm:text-base">Rejoignez CleanGo pour un service sur mesure</p>
                 </header>
 
+                <!-- Messages d'erreur de vérification email -->
                 {% for flash_error in app.flashes('verify_email_error') %}
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                        {{ flash_error }}
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 flex items-start" role="alert" aria-live="polite">
+                        <svg class="h-5 w-5 text-red-400 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{{ flash_error }}</span>
                     </div>
                 {% endfor %}
 
-                {{ form_errors(registrationForm) }}
+                <!-- Messages d'erreur du formulaire -->
+                {% if form_errors(registrationForm) %}
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4" role="alert" aria-live="polite">
+                        {{ form_errors(registrationForm) }}
+                    </div>
+                {% endif %}
 
-                {{ form_start(registrationForm, {'attr': {'class': 'mt-8 space-y-6'}}) }}
-                    <div class="space-y-4">
-                        <div>
-                            {{ form_label(registrationForm.email, 'Adresse email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                            <div class="mt-1 relative group">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <img src="{{ asset('img/email.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Email icon">
-                                </div>
-                                {{ form_widget(registrationForm.email, {'attr': {
-                                    'class': 'block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/50 transition-all duration-200 text-gray-900 placeholder-gray-400',
-                                    'placeholder': 'vous@exemple.com'
-                                }}) }}
-                            </div>
+                <!-- Information importante sur la sécurité -->
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5v3a.75.75 0 001.5 0v-3A.75.75 0 009 9z" clip-rule="evenodd" />
+                            </svg>
                         </div>
-
-                        <div>
-                            {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                            <div class="mt-1 relative group">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <img src="{{ asset('img/cadenas.png') }}" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200" alt="Password icon">
-                                </div>
-                                {{ form_widget(registrationForm.plainPassword, {'attr': {
-                                    'class': 'block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/50 transition-all duration-200 text-gray-900 placeholder-gray-400',
-                                    'placeholder': '••••••••'
-                                }}) }}
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Sécurité et confidentialité</h3>
+                            <div class="mt-2 text-sm text-blue-700">
+                                <p>Vos données personnelles sont protégées selon les normes RGPD. L'inscription est gratuite et sécurisée.</p>
                             </div>
-                        </div>
-
-                        <div class="flex items-center">
-                            {{ form_widget(registrationForm.agreeTerms, {'attr': {
-                                'class': 'h-4 w-4 text-[#3AA89E] focus:ring-[#3AA89E] border-gray-300 rounded'
-                            }}) }}
-                            {{ form_label(registrationForm.agreeTerms, "J'accepte les conditions générales d'utilisation", {'label_attr': {
-                                'class': 'ml-2 block text-sm text-gray-700'
-                            }}) }}
                         </div>
                     </div>
+                </div>
 
-                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl text-sm font-medium text-white bg-[#3AA89E] hover:bg-[#2C8278] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3AA89E] transition-all duration-200 shadow-lg shadow-[#3AA89E]/20 hover:shadow-xl hover:shadow-[#3AA89E]/30">
-                        S'inscrire
-                    </button>
+                {{ form_start(registrationForm, {'attr': {'class': 'mt-8 space-y-6', 'novalidate': true, 'aria-describedby': 'form-description'}}) }}
+                
+                    <!-- Description du formulaire pour l'accessibilité -->
+                    <div id="form-description" class="sr-only">
+                        Formulaire d'inscription CleanGo. Veuillez remplir tous les champs requis pour créer votre compte.
+                    </div>
+
+                    <fieldset class="space-y-6">
+                        <legend class="sr-only">Informations de connexion</legend>
+                        
+                        <div>
+                            {{ form_label(registrationForm.email, 'Adresse email *', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
+                            <div class="mt-1 relative group">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <img src="{{ asset('img/email.png') }}" alt="" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200">
+                                </div>
+                                {{ form_widget(registrationForm.email, {'attr': {
+                                    'class': 'block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/80 transition-all duration-200 text-gray-900 placeholder-gray-400',
+                                    'placeholder': 'votre@email.com',
+                                    'aria-required': 'true',
+                                    'aria-describedby': 'email-help',
+                                    'autocomplete': 'email'
+                                }}) }}
+                            </div>
+                            <p id="email-help" class="mt-1 text-xs text-gray-500">
+                                Utilisé pour la connexion et les notifications importantes
+                            </p>
+                        </div>
+
+                        <div>
+                            {{ form_label(registrationForm.plainPassword, 'Mot de passe *', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
+                            <div class="mt-1 relative group">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <img src="{{ asset('img/cadenas.png') }}" alt="" class="h-5 w-5 opacity-40 grayscale group-focus-within:grayscale-0 group-focus-within:opacity-100 group-focus-within:[filter:brightness(100%)_sepia(100%)_saturate(2000%)_hue-rotate(130deg)] transition-all duration-200">
+                                </div>
+                                {{ form_widget(registrationForm.plainPassword, {'attr': {
+                                    'class': 'block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] bg-white/80 transition-all duration-200 text-gray-900 placeholder-gray-400',
+                                    'placeholder': '••••••••',
+                                    'aria-required': 'true',
+                                    'aria-describedby': 'password-help',
+                                    'autocomplete': 'new-password'
+                                }}) }}
+                            </div>
+                            <p id="password-help" class="mt-1 text-xs text-gray-500">
+                                Minimum 6 caractères pour votre sécurité
+                            </p>
+                        </div>
+                    </fieldset>
+
+                    <!-- Section consentement RGPD -->
+                    <fieldset class="border border-gray-200 rounded-lg p-4 bg-gray-50/50">
+                        <legend class="text-sm font-medium text-gray-900 px-2">Consentement et conditions</legend>
+                        
+                        <div class="mt-4 space-y-3">
+                            <div class="flex items-start">
+                                {{ form_widget(registrationForm.agreeTerms, {'attr': {
+                                    'class': 'h-4 w-4 text-[#3AA89E] focus:ring-[#3AA89E] focus:ring-2 border-gray-300 rounded mt-0.5',
+                                    'aria-required': 'true',
+                                    'aria-describedby': 'terms-help'
+                                }}) }}
+                                <div class="ml-3">
+                                    {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {
+                                        'class': 'text-sm text-gray-700 leading-5'
+                                    }}) }}
+                                    <p id="terms-help" class="mt-1 text-xs text-gray-500">
+                                        En cochant cette case, vous acceptez nos 
+                                        <a href="#" class="text-[#3AA89E] hover:text-[#2C8278] underline focus:outline-none focus:ring-2 focus:ring-[#3AA89E] rounded-sm">conditions générales</a> 
+                                        et notre 
+                                        <a href="#" class="text-[#3AA89E] hover:text-[#2C8278] underline focus:outline-none focus:ring-2 focus:ring-[#3AA89E] rounded-sm">politique de confidentialité</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Information RGPD -->
+                            <div class="bg-white border border-gray-200 rounded-lg p-3 text-xs text-gray-600">
+                                <div class="flex items-start">
+                                    <svg class="h-4 w-4 text-gray-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium text-gray-700 mb-1">Protection de vos données</p>
+                                        <p>Conformément au RGPD, vos données sont chiffrées et utilisées uniquement pour la gestion de votre compte et l'amélioration de nos services. Vous disposez d'un droit d'accès, de rectification et de suppression.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Bouton d'inscription -->
+                    <div class="pt-2">
+                        <button type="submit" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl text-sm font-medium text-white bg-[#3AA89E] hover:bg-[#2C8278] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3AA89E] transition-all duration-200 shadow-lg shadow-[#3AA89E]/20 hover:shadow-xl hover:shadow-[#3AA89E]/30 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                            </svg>
+                            <span>Créer mon compte</span>
+                        </button>
+                    </div>
                 {{ form_end(registrationForm) }}
 
-                <nav class="text-center mt-8 text-sm text-gray-600" aria-label="Navigation secondaire">
-                    <p>
-                        Déjà membre ?
-                        <a href="{{ path('app_login') }}" class="font-medium text-[#3AA89E] hover:text-[#2C8278] transition-colors">
-                            Connectez-vous
-                        </a>
-                    </p>
-                </nav>
+                <!-- Navigation et aide -->
+                <div class="mt-8 space-y-4">
+                    <nav class="text-center text-sm text-gray-600" aria-label="Navigation secondaire">
+                        <p>
+                            Déjà membre ?
+                            <a href="{{ path('app_login') }}" class="font-medium text-[#3AA89E] hover:text-[#2C8278] focus:outline-none focus:ring-2 focus:ring-[#3AA89E] rounded-sm transition-colors">
+                                Connectez-vous
+                            </a>
+                        </p>
+                    </nav>
+
+                    <!-- Liens d'aide et support -->
+                    <div class="border-t border-gray-200 pt-4">
+                        <div class="text-center space-y-2">
+                            <p class="text-xs text-gray-500 font-medium">Besoin d'aide ?</p>
+                            <div class="flex justify-center space-x-4 text-xs">
+                                <a href="#" class="text-[#3AA89E] hover:text-[#2C8278] focus:outline-none focus:ring-2 focus:ring-[#3AA89E] rounded-sm transition-colors">
+                                    Support client
+                                </a>
+                                <span class="text-gray-300">|</span>
+                                <a href="#" class="text-[#3AA89E] hover:text-[#2C8278] focus:outline-none focus:ring-2 focus:ring-[#3AA89E] rounded-sm transition-colors">
+                                    FAQ
+                                </a>
+                                <span class="text-gray-300">|</span>
+                                <a href="#" class="text-[#3AA89E] hover:text-[#2C8278] focus:outline-none focus:ring-2 focus:ring-[#3AA89E] rounded-sm transition-colors">
+                                    Contact
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </div>

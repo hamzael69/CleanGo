@@ -2,84 +2,324 @@
 
 {% block title %}Réservation de service de nettoyage - CleanGo | Planifiez votre nettoyage{% endblock %}
 
+{% block meta_description %}Réservez facilement votre service de nettoyage professionnel à domicile. Choisissez votre date, vos services et obtenez un devis personnalisé en quelques clics.{% endblock %}
+
 {% block body %}
-    <main class="min-h-screen bg-volvic bg-cover bg-center">
-        <div class="min-h-screen bg-black/50">
-            <main class="container mx-auto px-4 py-8" role="main">
-                <section class="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 mt-14">
-                    <div>
-                        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+    <!-- Page de réservation avec amélioration d'accessibilité -->
+    <main class="min-h-screen bg-volvic bg-cover bg-center bg-fixed" role="main">
+        <!-- Overlay avec dégradé pour améliorer la lisibilité -->
+        <div class="min-h-screen bg-gradient-to-b from-black/60 via-black/50 to-black/60">
+            <!-- Espace en haut pour repositionner le formulaire plus bas -->
+            <div class="h-32"></div>
+            
+            <div class="container mx-auto px-4 py-8">
+                <!-- Breadcrumb pour la navigation -->
+                {# <nav aria-label="Fil d'Ariane" class="mb-6">
+                    <ol class="flex items-center space-x-2 text-white/80 text-sm">
+                        <li>
+                            <a href="{{ path('app_home') }}" 
+                               class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-black/50 rounded px-1">
+                                Accueil
+                            </a>
+                        </li>
+                        <li aria-hidden="true" class="text-white/50">→</li>
+                        <li aria-current="page" class="text-teal-200 font-medium">Réservation</li>
+                    </ol>
+                </nav> #}
+
+                <!-- Formulaire de réservation -->
+                <section class="max-w-3xl mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8"
+                         aria-labelledby="reservation-title">
+                    
+                    <!-- En-tête du formulaire -->
+                    <header class="text-center mb-8">
+                        <h1 id="reservation-title" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
                             Réserver votre nettoyage
-                        </h2>
+                        </h1>
+                        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                            Complétez ce formulaire pour programmer votre service de nettoyage professionnel. 
+                            Toutes les informations sont sécurisées et confidentielles.
+                        </p>
+                        
+                        <!-- Indicateur de progression -->
+                        <div class="mt-6 flex items-center justify-center space-x-2" aria-label="Étapes du formulaire">
+                            <div class="w-8 h-8 bg-[#3AA89E] text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                            <div class="w-12 h-1 bg-[#3AA89E]" aria-hidden="true"></div>
+                            <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                            <div class="w-12 h-1 bg-gray-300" aria-hidden="true"></div>
+                            <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Étape 1 sur 3 : Informations de réservation</p>
+                    </header>
+
+                    <!-- Formulaire accessible -->
+                    {{ form_start(form, {
+                        'attr': {
+                            'class': 'space-y-8',
+                            'novalidate': true,
+                            'aria-describedby': 'form-description'
+                        }
+                    }) }}
+                    
+                    <!-- Description du formulaire pour l'accessibilité -->
+                    <div id="form-description" class="sr-only">
+                        Formulaire de réservation de service de nettoyage. Tous les champs marqués d'un astérisque sont obligatoires.
                     </div>
 
-                    {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-                        <fieldset>
-                            <legend class="sr-only">Date et horaires</legend>
-                            <div class="space-y-4">
+                        <!-- Section 1: Date et horaires -->
+                        <fieldset class="border border-gray-200 rounded-xl p-6 bg-gray-50/50">
+                            <legend class="text-lg font-semibold text-gray-900 px-3 bg-white rounded">
+                                <svg class="w-5 h-5 inline mr-2 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Planification du service
+                            </legend>
+                            <div class="space-y-6 mt-4">
                                 <div class="space-y-2">
-                                    {{ form_label(form.date, 'Date', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                    {{ form_widget(form.date, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                                    {{ form_label(form.date, 'Date souhaitée *', {
+                                        'label_attr': {
+                                            'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                            'for': form.date.vars.id
+                                        }
+                                    }) }}
+                                    {{ form_widget(form.date, {
+                                        'attr': {
+                                            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                            'required': true,
+                                            'aria-describedby': 'date-help'
+                                        }
+                                    }) }}
+                                    <p id="date-help" class="text-sm text-gray-500 mt-1">
+                                        Sélectionnez la date à laquelle vous souhaitez que le service soit effectué
+                                    </p>
                                 </div>
 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="space-y-2">
-                                        {{ form_label(form.startTime, 'Heure de début', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                        {{ form_widget(form.startTime, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                                        {{ form_label(form.startTime, 'Heure de début *', {
+                                            'label_attr': {
+                                                'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                                'for': form.startTime.vars.id
+                                            }
+                                        }) }}
+                                        {{ form_widget(form.startTime, {
+                                            'attr': {
+                                                'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                                'required': true,
+                                                'aria-describedby': 'start-time-help'
+                                            }
+                                        }) }}
+                                        <p id="start-time-help" class="text-sm text-gray-500 mt-1">
+                                            Heure d'arrivée souhaitée
+                                        </p>
                                     </div>
                                     <div class="space-y-2">
-                                        {{ form_label(form.endTime, 'Heure de fin', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                        {{ form_widget(form.endTime, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
+                                        {{ form_label(form.endTime, 'Heure de fin *', {
+                                            'label_attr': {
+                                                'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                                'for': form.endTime.vars.id
+                                            }
+                                        }) }}
+                                        {{ form_widget(form.endTime, {
+                                            'attr': {
+                                                'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                                'required': true,
+                                                'aria-describedby': 'end-time-help'
+                                            }
+                                        }) }}
+                                        <p id="end-time-help" class="text-sm text-gray-500 mt-1">
+                                            Heure de fin estimée
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
 
-                        <fieldset>
-                            <legend class="sr-only">Informations sur le logement</legend>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Section 2: Informations sur le logement -->
+                        <fieldset class="border border-gray-200 rounded-xl p-6 bg-blue-50/30">
+                            <legend class="text-lg font-semibold text-gray-900 px-3 bg-white rounded">
+                                <svg class="w-5 h-5 inline mr-2 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2h14a2 2 0 012 2v2"></path>
+                                </svg>
+                                Informations sur le logement
+                            </legend>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                 <div class="space-y-2">
-                                    {{ form_label(form.numberOfRooms, 'Nombre de pièces', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                    {{ form_widget(form.numberOfRooms, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]', 'min': 1}}) }}
+                                    {{ form_label(form.numberOfRooms, 'Nombre de pièces *', {
+                                        'label_attr': {
+                                            'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                            'for': form.numberOfRooms.vars.id
+                                        }
+                                    }) }}
+                                    {{ form_widget(form.numberOfRooms, {
+                                        'attr': {
+                                            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                            'min': 1,
+                                            'required': true,
+                                            'aria-describedby': 'rooms-help'
+                                        }
+                                    }) }}
+                                    <p id="rooms-help" class="text-sm text-gray-500 mt-1">
+                                        Nombre total de pièces à nettoyer
+                                    </p>
                                 </div>
                                 <div class="space-y-2">
-                                    {{ form_label(form.livingSpace, 'Surface totale (m²)', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                    {{ form_widget(form.livingSpace, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]', 'min': 0}}) }}
+                                    {{ form_label(form.livingSpace, 'Surface totale (m²) *', {
+                                        'label_attr': {
+                                            'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                            'for': form.livingSpace.vars.id
+                                        }
+                                    }) }}
+                                    {{ form_widget(form.livingSpace, {
+                                        'attr': {
+                                            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                            'min': 0,
+                                            'required': true,
+                                            'aria-describedby': 'surface-help'
+                                        }
+                                    }) }}
+                                    <p id="surface-help" class="text-sm text-gray-500 mt-1">
+                                        Surface totale en mètres carrés
+                                    </p>
                                 </div>
                             </div>
                         </fieldset>
 
-                        <fieldset>
-                            <legend class="sr-only">Services</legend>
-                            <div class="space-y-2">
-                                {{ form_label(form.service, 'Services', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                {{ form_widget(form.service, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]'}}) }}
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <legend class="sr-only">Informations de tarification</legend>
-                            <div class="space-y-2">
-                                {{ form_label(form.price, 'Prix Proposé (€)', {'label_attr': {'class': 'text-gray-700 font-medium flex items-center'}}) }}
-                                {{ form_widget(form.price, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E]', 'min': 0, 'step': '0.01', 'placeholder': 'Proposez votre prix'}}) }}
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <legend class="sr-only">Instructions spécifiques</legend>
-                            <div class="space-y-2">
-                                {{ form_label(form.description, 'Instructions particulières', {'label_attr': {'class': 'text-gray-700 font-medium'}}) }}
-                                {{ form_widget(form.description, {
-                                    'attr': {
-                                        'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3AA89E] h-32 resize-none',
-                                        'placeholder': 'Accès au logement, spécificités à prendre en compte...'
+                        <!-- Section 3: Services -->
+                        <fieldset class="border border-gray-200 rounded-xl p-6 bg-green-50/30">
+                            <legend class="text-lg font-semibold text-gray-900 px-3 bg-white rounded">
+                                <svg class="w-5 h-5 inline mr-2 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Type de service
+                            </legend>
+                            <div class="space-y-2 mt-4">
+                                {{ form_label(form.service, 'Service souhaité *', {
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                        'for': form.service.vars.id
                                     }
                                 }) }}
-                                <p class="text-sm text-gray-500">
-                                    Ajoutez toute information utile pour le bon déroulement de l'intervention
+                                {{ form_widget(form.service, {
+                                    'attr': {
+                                        'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                        'required': true,
+                                        'aria-describedby': 'service-help'
+                                    }
+                                }) }}
+                                <p id="service-help" class="text-sm text-gray-500 mt-1">
+                                    Choisissez le type de nettoyage adapté à vos besoins
                                 </p>
                             </div>
                         </fieldset>
+
+                        <!-- Section 4: Tarification -->
+                        <fieldset class="border border-gray-200 rounded-xl p-6 bg-yellow-50/30">
+                            <legend class="text-lg font-semibold text-gray-900 px-3 bg-white rounded">
+                                <svg class="w-5 h-5 inline mr-2 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                                Proposition tarifaire
+                            </legend>
+                            <div class="space-y-2 mt-4">
+                                {{ form_label(form.price, 'Prix proposé (€)', {
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 font-medium mb-2 flex items-center',
+                                        'for': form.price.vars.id
+                                    }
+                                }) }}
+                                {{ form_widget(form.price, {
+                                    'attr': {
+                                        'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 min-h-[44px]',
+                                        'min': 0,
+                                        'step': '0.01',
+                                        'placeholder': 'Ex: 45.00',
+                                        'aria-describedby': 'price-help'
+                                    }
+                                }) }}
+                                <p id="price-help" class="text-sm text-gray-500 mt-1">
+                                    <span class="font-medium">Optionnel :</span> Proposez un budget pour ce service. 
+                                    Si laissé vide, le professionnel vous proposera un devis.
+                                </p>
+                            </div>
+                        </fieldset>
+
+                        <!-- Section 5: Instructions spécifiques -->
+                        <fieldset class="border border-gray-200 rounded-xl p-6 bg-purple-50/30">
+                            <legend class="text-lg font-semibold text-gray-900 px-3 bg-white rounded">
+                                <svg class="w-5 h-5 inline mr-2 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                                Instructions particulières
+                            </legend>
+                            <div class="space-y-2 mt-4">
+                                {{ form_label(form.description, 'Informations complémentaires', {
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 font-medium mb-2',
+                                        'for': form.description.vars.id
+                                    }
+                                }) }}
+                                {{ form_widget(form.description, {
+                                    'attr': {
+                                        'class': 'w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-[#3AA89E]/20 focus:border-[#3AA89E] transition-all duration-300 h-32 resize-none',
+                                        'placeholder': 'Ex: Code d\'accès, étage, animaux de compagnie, zones particulières à nettoyer...',
+                                        'aria-describedby': 'description-help',
+                                        'maxlength': 500
+                                    }
+                                }) }}
+                                <p id="description-help" class="text-sm text-gray-500 mt-1">
+                                    Ajoutez toute information utile pour le bon déroulement de l'intervention (accès au logement, spécificités, etc.)
+                                </p>
+                            </div>
+                        </fieldset>
+
+                        <!-- Section de validation et soumission -->
+                        <div class="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300">
+                            <div class="flex items-start space-x-3 mb-4">
+                                <svg class="w-6 h-6 text-[#3AA89E] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.25-2.25L21 21l-5.25-5.25M15 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Vérification et validation</h3>
+                                    <p class="text-gray-600 text-sm mb-4">
+                                        Avant de soumettre votre demande, veuillez vérifier que toutes les informations sont correctes.
+                                    </p>
+                                    
+                                    <!-- Consentement RGPD -->
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200 mb-4">
+                                        <label class="flex items-start space-x-3 cursor-pointer">
+                                            <input type="checkbox" 
+                                                   required 
+                                                   name="privacy_consent"
+                                                   class="mt-1 w-4 h-4 text-[#3AA89E] border-gray-300 rounded focus:ring-[#3AA89E] focus:ring-2"
+                                                   aria-describedby="privacy-text">
+                                            <span id="privacy-text" class="text-sm text-gray-700 leading-relaxed">
+                                                <span class="font-medium">J'accepte que mes données personnelles soient traitées</span> 
+                                                pour le traitement de cette demande de réservation. 
+                                                <a href="#" 
+                                                   class="text-[#3AA89E] hover:text-[#2C8278] underline focus:outline-none focus:ring-2 focus:ring-[#3AA89E] focus:ring-offset-1 rounded">
+                                                    Voir notre politique de confidentialité
+                                                </a>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Consentement marketing (optionnel) -->
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200 mb-4">
+                                        <label class="flex items-start space-x-3 cursor-pointer">
+                                            <input type="checkbox" 
+                                                   name="marketing_consent"
+                                                   class="mt-1 w-4 h-4 text-[#3AA89E] border-gray-300 rounded focus:ring-[#3AA89E] focus:ring-2"
+                                                   aria-describedby="marketing-text">
+                                            <span id="marketing-text" class="text-sm text-gray-700 leading-relaxed">
+                                                <span class="font-medium">J'accepte de recevoir des communications marketing</span> 
+                                                (offres spéciales, nouveaux services). Vous pouvez vous désinscrire à tout moment.
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         {# Champs cachés pour le client et le professionnel #}
                         {# <div class="hidden"> #}
@@ -88,14 +328,66 @@
                             {{ form_widget(form.isAccepted) }} #}
                         {# </div> #}
 
-                        <button type="submit"
-                                class="w-full bg-[#3AA89E] text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-200 font-medium">
-                            Confirmer la réservation
-                        </button>
+                        <!-- Boutons d'action -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                            <a href="{{ path('app_home') }}" 
+                               class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 rounded-lg transition-all duration-300 font-medium text-center focus:outline-none focus:ring-4 focus:ring-gray-300/50 min-h-[44px] flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                                Retour à l'accueil
+                            </a>
+                            
+                            <button type="submit"
+                                    class="flex-1 bg-[#3AA89E] hover:bg-[#2C8278] text-white py-3 px-6 rounded-lg transition-all duration-300 font-medium focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl min-h-[44px] flex items-center justify-center"
+                                    aria-describedby="submit-help">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Confirmer la réservation
+                            </button>
+                        </div>
+                        
+                        <p id="submit-help" class="text-sm text-gray-500 text-center mt-2">
+                            Une fois soumise, votre demande sera transmise aux professionnels disponibles dans votre secteur.
+                        </p>
 
                     {{ form_end(form) }}
                 </section>
-            </main>
+
+                <!-- Informations complémentaires pour l'utilisateur -->
+                {# <aside class="max-w-3xl mx-auto mt-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6"
+                       aria-labelledby="additional-info-title">
+                    <h2 id="additional-info-title" class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Informations importantes
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-600">
+                        <div>
+                            <h3 class="font-medium text-gray-900 mb-2">🔒 Sécurité des données</h3>
+                            <p>Vos informations personnelles sont protégées et ne seront jamais partagées avec des tiers sans votre consentement.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-900 mb-2">⏱️ Temps de réponse</h3>
+                            <p>Vous recevrez une première réponse dans les 2 heures ouvrées suivant votre demande.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-900 mb-2">✅ Professionnels vérifiés</h3>
+                            <p>Tous nos professionnels sont vérifiés, assurés et formés aux standards de qualité CleanGo.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-900 mb-2">📞 Support client</h3>
+                            <p>Notre équipe est disponible du lundi au vendredi de 8h à 19h au 01 23 45 67 89.</p>
+                        </div>
+                    </div>
+                </aside> #}
+            </div>
         </div>
     </main>
 {% endblock %}

@@ -1,30 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %}CleanGo - Service de nettoyage professionnel à domicile | Réservation en ligne{% endblock %}
 
+{% block meta_description %}CleanGo vous propose des services de nettoyage professionnel à domicile. Réservez facilement en ligne vos séances de ménage avec des experts qualifiés. Satisfaction garantie.{% endblock %}
 
 {% block body %}
-	{# Hero Banner #}
-	<section class="relative min-h-screen w-full bg-hero bg-cover bg-center bg-no-repeat">
-		<div
-			class="absolute inset-0 bg-black/50 flex items-center justify-center">
-			{# Overlay sombre #}
-			<div class="container mx-auto flex flex-col items-center justify-center text-white px-4">
-				<span class="text-3xl md:text-6xl font-bold text-center mb-4 text-teal-200">Un ménage impéccable
-					<br><span class="text-white">en quelques clics</span>
-				</span>
-				<p class="text-base md:text-2xl text-center mb-8">Réservez un service de nettoyage professionnel à domicile en<br class="hidden lg:block">quelques minutes. Des experts qualifiés, des résultats garantis.</p>
-				<div class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-					<a href="#" class="bg-vertBase hover:bg-vertBase/80 text-white  px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
-						Reservez maintenant
-					</a>
-					<a href="#" class="bg-teal-200 hover:bg-vertBase/80 text-vertBase hover:text-white px-4 py-2 lg:px-8 lg:py-3 rounded-md transition-colors duration-300 text-center font-semibold text-sm lg:text-base">
+	<!-- Hero Banner avec amélioration d'accessibilité -->
+	<section class="relative min-h-screen w-full bg-hero bg-cover bg-center bg-no-repeat" 
+			 role="banner" 
+			 aria-labelledby="hero-title">
+		<!-- Overlay avec dégradé pour améliorer la lisibilité -->
+		<div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 flex items-center justify-center">
+			<div class="container mx-auto flex flex-col items-center justify-center text-white px-4 py-8">
+				<header class="text-center max-w-4xl">
+					<h1 id="hero-title" class="text-3xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+						<span class="text-teal-200">Un ménage impeccable</span>
+						<br>
+						<span class="text-white">en quelques clics</span>
+					</h1>
+					<p class="text-lg md:text-xl lg:text-2xl text-center mb-8 leading-relaxed text-gray-100 max-w-3xl mx-auto">
+						Réservez un service de nettoyage professionnel à domicile en quelques minutes. 
+						<br class="hidden lg:block">
+						Des experts qualifiés, des résultats garantis.
+					</p>
+				</header>
+				
+				<nav class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:space-x-6" 
+					 aria-label="Actions principales">
+					{% if app.user %}
+						<a href="{{ path('cleaning_request_create') }}" 
+						   class="inline-flex items-center justify-center bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg transition-all duration-300 text-center font-semibold text-base lg:text-lg min-h-[44px] focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+						   aria-label="Réserver un service de nettoyage maintenant">
+							<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+							</svg>
+							Réserver maintenant
+						</a>
+					{% else %}
+						<a href="{{ path('app_register') }}" 
+						   class="inline-flex items-center justify-center bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg transition-all duration-300 text-center font-semibold text-base lg:text-lg min-h-[44px] focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+						   aria-label="S'inscrire pour réserver un service de nettoyage">
+							<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+							</svg>
+							Réserver maintenant
+						</a>
+					{% endif %}
+					
+					<a href="#services" 
+					   class="inline-flex items-center justify-center bg-teal-200 hover:bg-[#3AA89E] text-[#2C8278] hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg transition-all duration-300 text-center font-semibold text-base lg:text-lg min-h-[44px] focus:outline-none focus:ring-4 focus:ring-teal-200/50 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+					   aria-label="Découvrir nos services de nettoyage">
+						<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+						</svg>
 						Nos services
 					</a>
-				</div>
-
+				</nav>
 			</div>
+		</div>
+		
+		<!-- Indicateur de scroll pour l'accessibilité -->
+		<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" aria-hidden="true">
+			<svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+			</svg>
 		</div>
 	</section>
 
@@ -65,81 +104,459 @@
 	</section>
 
 
-	<section class="py-12 px-6 text-center bg-gray-50">
-		<h2 class="text-2xl font-semibold text-gray-900">Comment ça marche</h2>
-		<p class="text-gray-600 mt-2">Un processus simple en trois étapes pour un intérieur impeccable</p>
+	<!-- Section Avantages avec structure accessible -->
+	<section class="py-16 px-6 bg-gray-50" aria-labelledby="quality-title">
+		<div class="container mx-auto">
+			<header class="text-center mb-12">
+				<h2 id="quality-title" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+					Un service de qualité
+				</h2>
+				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+					Un service fiable, pour un intérieur impeccable en toute sérénité.
+				</p>
+			</header>
 
-		<div
-			class="container mx-auto mt-8 flex flex-col md:flex-row items-center justify-center md:space-x-20 space-y-12 md:space-y-0">
-			<!-- Étape 1 -->
-			<div class="max-w-xs text-center">
-				<div class="w-24 h-24 mx-auto flex items-center justify-center bg-teal-100 rounded-full shadow-md">
-					<img src="{{ asset('img/calendrier2.png') }}" alt="Réservez en ligne" class="w-12 h-12 object-contain">
-				</div>
-				<h3 class="text-lg font-semibold text-gray-900 mt-4">Réservez en ligne</h3>
-				<p class="text-gray-600 mt-2">Choisissez la date, l’heure et le type de service qui vous convient en quelques clics.</p>
-			</div>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				<!-- Réservation facile -->
+				<article class="bg-white p-8 shadow-lg rounded-xl text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-4 focus-within:ring-[#3AA89E]/20">
+					<div class="flex justify-center mb-6">
+						<div class="w-20 h-20 bg-[#3AA89E]/10 rounded-full flex items-center justify-center">
+							<img src="{{ asset('img/calendrier.png') }}" 
+								 alt="" 
+								 class="w-12 h-12 object-contain"
+								 loading="lazy"
+								 width="48"
+								 height="48"/>
+						</div>
+					</div>
+					<h3 class="font-bold text-xl text-gray-900 mb-4">Réservation facile</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Réservez en ligne en quelques minutes pour le jour qui vous convient. 
+						Interface simple et intuitive.
+					</p>
+				</article>
 
-			<!-- Étape 2 -->
-			<div class="max-w-xs text-center">
-				<div class="w-24 h-24 mx-auto flex items-center justify-center bg-teal-100 rounded-full">
-					<img src="{{ asset('img/utilisateur-valide.png') }}" alt="Rencontrez votre professionnel" class="w-12 h-12">
-				</div>
-				<h3 class="text-lg font-semibold text-gray-900 mt-4">Rencontrez votre professionnel</h3>
-				<p class="text-gray-600 mt-2">Un expert qualifié arrive selon votre demande & à l’heure convenue.</p>
-			</div>
+				<!-- Service ponctuel -->
+				<article class="bg-white p-8 shadow-lg rounded-xl text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-4 focus-within:ring-[#3AA89E]/20">
+					<div class="flex justify-center mb-6">
+						<div class="w-20 h-20 bg-[#3AA89E]/10 rounded-full flex items-center justify-center">
+							<img src="{{ asset('img/horloge.png') }}" 
+								 alt="" 
+								 class="w-12 h-12 object-contain"
+								 loading="lazy"
+								 width="48"
+								 height="48"/>
+						</div>
+					</div>
+					<h3 class="font-bold text-xl text-gray-900 mb-4">Service ponctuel</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Nos professionnels arrivent à l'heure convenue, respectant votre emploi du temps. 
+						Ponctualité garantie.
+					</p>
+				</article>
 
-			<!-- Étape 3 -->
-			<div class="max-w-xs text-center">
-				<div class="w-24 h-24 mx-auto flex items-center justify-center bg-teal-100 rounded-full">
-					<img src="{{ asset('img/maison-simple-mince.png') }}" alt="Profitez d’un intérieur impeccable" class="w-12 h-12">
-				</div>
-				<h3 class="text-lg font-semibold text-gray-900 mt-4">Profitez d’un intérieur impeccable</h3>
-				<p class="text-gray-600 mt-2">Détendez-vous dans un espace fraîchement nettoyé et profitez du confort.</p>
-			</div>
-		</div>
-	</section>
-
-	<section class="py-16 px-6 text-center bg-white">
-		<h2 class="text-3xl font-semibold text-gray-900 mb-3">Nos services</h2>
-		<p class="text-gray-600 mt-2 mb-8">Des solutions adaptées à tous vos besoins de nettoyage</p>
-
-		<div
-			class="container mx-auto mt-12 flex flex-col items-center md:items-stretch md:flex-row md:justify-center gap-8 px-4">
-			<!-- Carte Service 1 -->
-			<div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
-				<div class="flex-grow">
-					<h3 class="text-lg font-semibold text-gray-900 mb-4">Nettoyage standard</h3>
-					<p class="text-gray-600 mt-2">Un nettoyage minutieux de votre intérieur incluant dépoussiérage, aspiration, lavage des sols et surfaces.</p>
-				</div>
-				<a href="#" class="mt-6 inline-block bg-vertBase text-white px-6 py-3 rounded-md font-semibold hover:bg-vertBase/80 transition-colors duration-300">
-					Réserver maintenant
-				</a>
-			</div>
-
-			<!-- Carte Service 2 -->
-			<div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
-				<div class="flex-grow">
-					<h3 class="text-lg font-semibold text-gray-900 mb-4">Nettoyage en profondeur</h3>
-					<p class="text-gray-600 mt-2">Idéal après un déménagement ou un entretien ponctuel intensif, avec des résultats impeccables.</p>
-				</div>
-				<a href="#" class="mt-6 inline-block bg-vertBase text-white px-6 py-3 rounded-md font-semibold hover:bg-vertBase/80 transition-colors duration-300">
-					Réserver maintenant
-				</a>
-			</div>
-
-			<!-- Carte Service 3 -->
-			<div class="bg-gray-50 p-6 shadow-md rounded-lg w-full max-w-sm text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
-				<div class="flex-grow">
-					<h3 class="text-lg font-semibold text-gray-900 mb-4">Nettoyage personnalisé</h3>
-					<p class="text-gray-600 mt-2">Service flexible adapté à vos besoins spécifiques : grand ménage, nettoyage après travaux, etc.</p>
-				</div>
-				<a href="#" class="mt-6 inline-block bg-vertBase text-white px-6 py-3 rounded-md font-semibold hover:bg-vertBase/80 transition-colors duration-300">
-					Réserver maintenant
-				</a>
+				<!-- Qualité garantie -->
+				<article class="bg-white p-8 shadow-lg rounded-xl text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-4 focus-within:ring-[#3AA89E]/20 md:col-span-2 lg:col-span-1">
+					<div class="flex justify-center mb-6">
+						<div class="w-20 h-20 bg-[#3AA89E]/10 rounded-full flex items-center justify-center">
+							<img src="{{ asset('img/verifier.png') }}" 
+								 alt="" 
+								 class="w-12 h-12 object-contain"
+								 loading="lazy"
+								 width="48"
+								 height="48"/>
+						</div>
+					</div>
+					<h3 class="font-bold text-xl text-gray-900 mb-4">Qualité garantie</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Satisfaction garantie ou nous revenons gratuitement pour corriger. 
+						Votre satisfaction est notre priorité.
+					</p>
+				</article>
 			</div>
 		</div>
 	</section>
 
+
+	<!-- Section Comment ça marche avec amélioration d'accessibilité -->
+	<section class="py-16 px-6 bg-white" aria-labelledby="how-it-works-title" id="comment-ca-marche">
+		<div class="container mx-auto">
+			<header class="text-center mb-12">
+				<h2 id="how-it-works-title" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+					Comment ça marche
+				</h2>
+				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+					Un processus simple en trois étapes pour un intérieur impeccable
+				</p>
+			</header>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+				<!-- Étape 1 -->
+				<article class="text-center group">
+					<div class="relative mb-6">
+						<!-- Numéro d'étape -->
+						<div class="absolute -top-2 -left-2 w-8 h-8 bg-[#3AA89E] text-white rounded-full flex items-center justify-center text-sm font-bold z-10" aria-label="Étape 1">
+							1
+						</div>
+						<!-- Icône -->
+						<div class="w-20 h-20 mx-auto flex items-center justify-center bg-[#3AA89E]/10 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+							<img src="{{ asset('img/calendrier2.png') }}" 
+								 alt="" 
+								 class="w-12 h-12 object-contain"
+								 loading="lazy"
+								 width="48"
+								 height="48"/>
+						</div>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Réservez en ligne</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Choisissez la date, l'heure et le type de service qui vous convient en quelques clics. 
+						Interface simple et sécurisée.
+					</p>
+				</article>
+
+				<!-- Étape 2 -->
+				<article class="text-center group">
+					<div class="relative mb-6">
+						<!-- Numéro d'étape -->
+						<div class="absolute -top-2 -left-2 w-8 h-8 bg-[#3AA89E] text-white rounded-full flex items-center justify-center text-sm font-bold z-10" aria-label="Étape 2">
+							2
+						</div>
+						<!-- Icône -->
+						<div class="w-20 h-20 mx-auto flex items-center justify-center bg-[#3AA89E]/10 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+							<img src="{{ asset('img/utilisateur-valide.png') }}" 
+								 alt="" 
+								 class="w-12 h-12 object-contain"
+								 loading="lazy"
+								 width="48"
+								 height="48"/>
+						</div>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Rencontrez votre professionnel</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Un expert qualifié arrive selon votre demande à l'heure convenue. 
+						Professionnels vérifiés et assurés.
+					</p>
+				</article>
+
+				<!-- Étape 3 -->
+				<article class="text-center group">
+					<div class="relative mb-6">
+						<!-- Numéro d'étape -->
+						<div class="absolute -top-2 -left-2 w-8 h-8 bg-[#3AA89E] text-white rounded-full flex items-center justify-center text-sm font-bold z-10" aria-label="Étape 3">
+							3
+						</div>
+						<!-- Icône -->
+						<div class="w-20 h-20 mx-auto flex items-center justify-center bg-[#3AA89E]/10 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+							<img src="{{ asset('img/maison-simple-mince.png') }}" 
+								 alt="" 
+								 class="w-12 h-12 object-contain"
+								 loading="lazy"
+								 width="48"
+								 height="48"/>
+						</div>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Profitez d'un intérieur impeccable</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Détendez-vous dans un espace fraîchement nettoyé et profitez du confort. 
+						Satisfaction garantie.
+					</p>
+				</article>
+			</div>
+
+			<!-- Flèches de progression (décoratives) -->
+			<div class="hidden md:flex justify-center items-center mt-12 space-x-8" aria-hidden="true">
+				<div class="flex items-center space-x-4">
+					<div class="w-8 h-8 bg-[#3AA89E] rounded-full flex items-center justify-center">
+						<span class="text-white text-sm font-bold">1</span>
+					</div>
+					<svg class="w-8 h-4 text-[#3AA89E]" fill="currentColor" viewBox="0 0 20 10">
+						<path d="M15 5l-5-3v2H0v2h10v2l5-3z"/>
+					</svg>
+					<div class="w-8 h-8 bg-[#3AA89E] rounded-full flex items-center justify-center">
+						<span class="text-white text-sm font-bold">2</span>
+					</div>
+					<svg class="w-8 h-4 text-[#3AA89E]" fill="currentColor" viewBox="0 0 20 10">
+						<path d="M15 5l-5-3v2H0v2h10v2l5-3z"/>
+					</svg>
+					<div class="w-8 h-8 bg-[#3AA89E] rounded-full flex items-center justify-center">
+						<span class="text-white text-sm font-bold">3</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Section Nos services avec amélioration d'accessibilité -->
+	<section class="py-16 px-6 bg-gray-50" aria-labelledby="services-title" id="services">
+		<div class="container mx-auto">
+			<header class="text-center mb-12">
+				<h2 id="services-title" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+					Nos services
+				</h2>
+				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+					Des solutions adaptées à tous vos besoins de nettoyage
+				</p>
+			</header>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				<!-- Service 1 - Nettoyage standard -->
+				<article class="bg-white p-8 shadow-lg rounded-xl text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-4 focus-within:ring-[#3AA89E]/20 flex flex-col">
+					<div class="flex-grow">
+						<div class="w-16 h-16 bg-[#3AA89E]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+							<svg class="w-8 h-8 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-gray-900 mb-4">Nettoyage standard</h3>
+						<p class="text-gray-600 leading-relaxed mb-6">
+							Un nettoyage minutieux de votre intérieur incluant dépoussiérage, aspiration, 
+							lavage des sols et surfaces.
+						</p>
+					</div>
+					<div class="mt-auto">
+						{% if app.user %}
+							<a href="{{ path('cleaning_request_create') }}" 
+							   class="inline-flex items-center justify-center w-full bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 min-h-[44px]"
+							   aria-label="Réserver un nettoyage standard">
+								Réserver maintenant
+							</a>
+						{% else %}
+							<a href="{{ path('app_register') }}" 
+							   class="inline-flex items-center justify-center w-full bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 min-h-[44px]"
+							   aria-label="S'inscrire pour réserver un nettoyage standard">
+								Réserver maintenant
+							</a>
+						{% endif %}
+					</div>
+				</article>
+
+				<!-- Service 2 - Nettoyage en profondeur -->
+				<article class="bg-white p-8 shadow-lg rounded-xl text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-4 focus-within:ring-[#3AA89E]/20 flex flex-col">
+					<div class="flex-grow">
+						<div class="w-16 h-16 bg-[#3AA89E]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+							<svg class="w-8 h-8 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-gray-900 mb-4">Nettoyage en profondeur</h3>
+						<p class="text-gray-600 leading-relaxed mb-6">
+							Idéal après un déménagement ou un entretien ponctuel intensif, 
+							avec des résultats impeccables.
+						</p>
+					</div>
+					<div class="mt-auto">
+						{% if app.user %}
+							<a href="{{ path('cleaning_request_create') }}" 
+							   class="inline-flex items-center justify-center w-full bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 min-h-[44px]"
+							   aria-label="Réserver un nettoyage en profondeur">
+								Réserver maintenant
+							</a>
+						{% else %}
+							<a href="{{ path('app_register') }}" 
+							   class="inline-flex items-center justify-center w-full bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 min-h-[44px]"
+							   aria-label="S'inscrire pour réserver un nettoyage en profondeur">
+								Réserver maintenant
+							</a>
+						{% endif %}
+					</div>
+				</article>
+
+				<!-- Service 3 - Nettoyage personnalisé -->
+				<article class="bg-white p-8 shadow-lg rounded-xl text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-4 focus-within:ring-[#3AA89E]/20 flex flex-col md:col-span-2 lg:col-span-1">
+					<div class="flex-grow">
+						<div class="w-16 h-16 bg-[#3AA89E]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+							<svg class="w-8 h-8 text-[#3AA89E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-gray-900 mb-4">Nettoyage personnalisé</h3>
+						<p class="text-gray-600 leading-relaxed mb-6">
+							Service flexible adapté à vos besoins spécifiques : grand ménage, 
+							nettoyage après travaux, etc.
+						</p>
+					</div>
+					<div class="mt-auto">
+						{% if app.user %}
+							<a href="{{ path('cleaning_request_create') }}" 
+							   class="inline-flex items-center justify-center w-full bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 min-h-[44px]"
+							   aria-label="Réserver un nettoyage personnalisé">
+								Réserver maintenant
+							</a>
+						{% else %}
+							<a href="{{ path('app_register') }}" 
+							   class="inline-flex items-center justify-center w-full bg-[#3AA89E] hover:bg-[#2C8278] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#3AA89E]/30 focus:ring-offset-2 transform hover:-translate-y-0.5 min-h-[44px]"
+							   aria-label="S'inscrire pour réserver un nettoyage personnalisé">
+								Réserver maintenant
+							</a>
+						{% endif %}
+					</div>
+				</article>
+			</div>
+
+			<!-- Call-to-action additionnel -->
+			<div class="text-center mt-12">
+				<p class="text-gray-600 mb-6 text-lg">
+					Vous avez des questions ou besoin d'un devis personnalisé ?
+				</p>
+				<a href="#contact" 
+				   class="inline-flex items-center justify-center bg-teal-200 hover:bg-[#3AA89E] text-[#2C8278] hover:text-white px-8 py-4 rounded-lg transition-all duration-300 text-lg font-semibold min-h-[44px] focus:outline-none focus:ring-4 focus:ring-teal-200/50 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+				   aria-label="Nous contacter pour plus d'informations">
+					<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+					</svg>
+					Nous contacter
+				</a>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer avec informations légales pour conformité RGPD -->
+	<footer class="bg-gray-900 text-white py-12 px-6" role="contentinfo" aria-labelledby="footer-title">
+		<div class="container mx-auto">
+			<!-- Titre du footer (caché visuellement mais accessible) -->
+			<h2 id="footer-title" class="sr-only">Informations légales et contact</h2>
+			
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<!-- Contact -->
+				<div>
+					<h3 class="text-lg font-semibold mb-4 text-teal-200">Contact</h3>
+					<address class="not-italic text-gray-300 space-y-2">
+						<p class="flex items-center">
+							<svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+							</svg>
+							<a href="mailto:contact@cleango.fr" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								contact@cleango.fr
+							</a>
+						</p>
+						<p class="flex items-center">
+							<svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+							</svg>
+							<a href="tel:+33123456789" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								01 23 45 67 89
+							</a>
+						</p>
+					</address>
+				</div>
+
+				<!-- Services -->
+				<div>
+					<h3 class="text-lg font-semibold mb-4 text-teal-200">Nos services</h3>
+					<ul class="space-y-2 text-gray-300">
+						<li>
+							<a href="#services" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Nettoyage standard
+							</a>
+						</li>
+						<li>
+							<a href="#services" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Nettoyage en profondeur
+							</a>
+						</li>
+						<li>
+							<a href="#services" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Nettoyage personnalisé
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Informations légales -->
+				<div>
+					<h3 class="text-lg font-semibold mb-4 text-teal-200">Informations légales</h3>
+					<ul class="space-y-2 text-gray-300">
+						<li>
+							<a href="#" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Mentions légales
+							</a>
+						</li>
+						<li>
+							<a href="#" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Conditions générales
+							</a>
+						</li>
+						<li>
+							<a href="#" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Politique de confidentialité
+							</a>
+						</li>
+						<li>
+							<a href="#" 
+							   class="hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+								Déclaration d'accessibilité
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Réseaux sociaux -->
+				<div>
+					<h3 class="text-lg font-semibold mb-4 text-teal-200">Suivez-nous</h3>
+					<div class="flex space-x-4">
+						<a href="#" 
+						   class="text-gray-300 hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded p-1"
+						   aria-label="Suivez-nous sur Facebook">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+							</svg>
+						</a>
+						<a href="#" 
+						   class="text-gray-300 hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded p-1"
+						   aria-label="Suivez-nous sur Instagram">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348zm7.718 0c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348z"/>
+							</svg>
+						</a>
+						<a href="#" 
+						   class="text-gray-300 hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded p-1"
+						   aria-label="Suivez-nous sur Twitter">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Séparateur -->
+			<hr class="my-8 border-gray-700" aria-hidden="true">
+
+			<!-- Copyright et informations finales -->
+			<div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+				<div class="text-gray-400 text-sm">
+					<p>© 2025 CleanGo. Tous droits réservés.</p>
+				</div>
+				<div class="text-gray-400 text-sm">
+					<p>
+						Service de nettoyage professionnel - 
+						<span class="font-medium">Satisfaction garantie</span>
+					</p>
+				</div>
+			</div>
+
+			<!-- Notice RGPD (si nécessaire) -->
+			<div class="mt-6 text-xs text-gray-500 text-center">
+				<p>
+					Ce site respecte votre vie privée. Nous utilisons des cookies pour améliorer votre expérience. 
+					<a href="#" 
+					   class="underline hover:text-teal-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+						En savoir plus
+					</a>
+				</p>
+			</div>
+		</div>
+	</footer>
 
 {% endblock %}
