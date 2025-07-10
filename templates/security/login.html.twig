@@ -2,9 +2,7 @@
 
 {% block title %}Connexion à votre espace CleanGo - Service de nettoyage professionnel{% endblock %}
 
-{% block meta_description %}
-<meta name="description" content="Connectez-vous à votre espace client CleanGo pour gérer vos réservations, consulter l'historique de vos services de nettoyage et accéder à votre profil personnel.">
-{% endblock %}
+
 
 {% block body %}
     <!-- Navigation breadcrumb -->
@@ -26,7 +24,7 @@
         <p>Accédez à votre espace personnel CleanGo pour gérer vos services de nettoyage et réservations</p>
     </div>
 
-    <div class="absolute inset-0 w-full h-full -z-10" role="img" aria-label="Arrière-plan décoratif montrant un intérieur propre">
+    <div class="fixed inset-0 w-full h-full -z-10" role="img" aria-label="Arrière-plan décoratif montrant un intérieur propre">
         <img src="{{ asset('img/rawe.jpg') }}" 
             alt="Intérieur moderne et propre représentant la qualité de service CleanGo" 
             class="w-full h-full object-cover object-center"
